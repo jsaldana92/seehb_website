@@ -63,7 +63,7 @@ export default function Title() {
                         gsap.set(el, {
                             position: 'absolute',
                             top: '-1200px',
-                            right: '-1800px',
+                            right: '-1400px',
                             zIndex: 10,
                             scale: 1.7,
                         });
@@ -138,7 +138,7 @@ export default function Title() {
                     gsap.set(el, {
                     position: 'absolute',
                     top: '-500px',
-                    left: '-900px',
+                    left: '-600px',
                     zIndex: 10,
                     scale: 1.5,
                     });
@@ -161,8 +161,8 @@ export default function Title() {
                 if (context.conditions.isMedium) {
                     gsap.set(el, {
                     position: 'absolute',
-                    top: '-1200px',
-                    left: '-1800px',
+                    top: '-1000px',
+                    left: '-1200px',
                     zIndex: 10,
                     scale: 2,
                     });
@@ -186,7 +186,7 @@ export default function Title() {
                     gsap.set(el, {
                     position: 'absolute',
                     top: '-1000px',
-                    left: '-1800px',
+                    left: '-1100px',
                     zIndex: 10,
                     scale: 1.5,
                     });
@@ -259,8 +259,8 @@ export default function Title() {
                 if (context.conditions.isMedium) {
                     gsap.set(el, {
                     position: 'absolute',
-                    bottom: '-1200px',
-                    right: '-1800px',
+                    bottom: '-1000px',
+                    right: '-1400px',
                     zIndex: 10,
                     scale: 2,
                     });
@@ -357,8 +357,8 @@ export default function Title() {
                 if (context.conditions.isMedium) {
                     gsap.set(el, {
                     position: 'absolute',
-                    bottom: '-1200px',
-                    left: '-1800px',
+                    bottom: '-1000px',
+                    left: '-1200px',
                     zIndex: 10,
                     scale: 2,
                     });
@@ -382,7 +382,7 @@ export default function Title() {
                     gsap.set(el, {
                     position: 'absolute',
                     bottom: '-1000px',
-                    left: '-2000px',
+                    left: '-1600px',
                     zIndex: 10,
                     scale: 1.5,
                     });
@@ -417,7 +417,7 @@ export default function Title() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#F6BB17] w-full min-h-[60vh] px-6 py-40 flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-between space-y-6 md:space-y-0 md:space-x-10"
+      className="relative bg-[#F6BB17] w-full min-h-[60vh] px-6 py-40 flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-between space-y-6 md:space-y-0 md:space-x-10 pointer-events-none"
     >
       {/* Branch image */}
         <img
@@ -446,8 +446,8 @@ export default function Title() {
         className="w-40 md:w-56 object-contain z-5 rotate-10"
         />
 
-      {/* Left: Logo */}
-      <div className="flex-1 flex items-center justify-center z-10">
+      {/* Left: Logo z-10 makes the logo appear above the branches*/}
+      <div className="flex-1 flex items-center justify-center z-2">
         <div className="w-full max-w-[450px] md:max-w-[650px] aspect-[3/2]">
           <img
             src={seehbLogo}
@@ -460,10 +460,10 @@ export default function Title() {
       {/* Right: Text */}
       <div className="flex-1 flex items-center justify-center z-10">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black drop-shadow-md">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black custom-shadow">
             Join us Feb 7th to 8th, 2025
           </h1>
-          <h2 className="text-xl md:text-2xl text-white drop-shadow-md">
+          <h2 className="text-xl md:text-2xl text-white drop-shadow-2xl custom-shadow">
             at Indian Creek Lodge, Georgia State University
           </h2>
           <button className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 transition">
