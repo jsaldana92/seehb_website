@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import HoverOrTouchHandler from './hoverortouchhandler';
 
 import brosnan from '../assets/images/brosnan.png';
 import benitez from '../assets/images/benitez.png';
@@ -133,8 +134,10 @@ export default function SteeringCommittee2() {
   );
 
   return (
-    <section ref={sectionRef} className="relative bg-[#F6BB17] py-20 w-full flex flex-col items-center overflow-hidden">
-      {/* Header */}
+    <section
+      ref={sectionRef}
+      className="relative bg-[#F6BB17] py-20 w-full flex flex-col items-center overflow-hidden"
+    >
       <div className="w-full pl-4 pr-4 md:pl-4 md:pr-8 text-right">
         <h2 className="text-2xl md:text-3xl custom-shadow-sm font-bold text-black text-center md:text-right">
           This year's conference is organized by our dedicated steering committee
@@ -144,31 +147,47 @@ export default function SteeringCommittee2() {
       {/* Committee Grid */}
       <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 justify-center">
         {committee.map((person, idx) => (
-          <div key={idx} className="relative w-40 aspect-square group overflow-hidden rounded shadow-lg">
-            <img
-              src={person.img}
-              alt={`${person.first} ${person.last}`}
-              className="w-full h-full object-cover transition duration-300 ease-in-out"
-            />
-            {person.logo && (
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                <img src={person.logo} alt="logo" className="w-full h-full object-cover brightness-40 blur-[0.2px]" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-white custom-shadow font-bold text-center text-sm px-2">
-                    {person.institution}
+          <HoverOrTouchHandler key={idx}>
+            {(isHovered) => (
+              <div className="relative w-40 aspect-square group overflow-hidden rounded shadow-lg cursor-pointer">
+                <img
+                  src={person.img}
+                  alt={`${person.first} ${person.last}`}
+                  className="w-full h-full object-cover transition duration-300 ease-in-out"
+                />
+                {person.logo && (
+                  <div
+                    className={`absolute inset-0 transition duration-300 ease-in-out ${
+                      isHovered ? 'opacity-100' : 'opacity-0'
+                    } pointer-events-none`}
+                  >
+                    <img
+                      src={person.logo}
+                      alt="logo"
+                      className="w-full h-full object-cover brightness-40 blur-[0.2px]"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-white custom-shadow font-bold text-center text-sm px-2">
+                        {person.institution}
+                      </div>
+                    </div>
                   </div>
+                )}
+                <div
+                  className={`absolute bottom-2 right-2 text-md custom-shadow text-white text-right transition-opacity duration-300 ease-in-out ${
+                    isHovered ? 'opacity-0' : 'opacity-100'
+                  }`}
+                >
+                  <div className="font-semibold leading-none">{person.first}</div>
+                  <div className="font-semibold leading-none">{person.last}</div>
                 </div>
               </div>
             )}
-            <div className="absolute bottom-2 right-2 text-md custom-shadow text-white text-right transition-opacity duration-300 ease-in-out group-hover:opacity-0">
-              <div className="font-semibold leading-none">{person.first}</div>
-              <div className="font-semibold leading-none">{person.last}</div>
-            </div>
-          </div>
+          </HoverOrTouchHandler>
         ))}
       </div>
 
-      {/* RSVP Section with Animated Branches */}
+      {/* RSVP Section */}
       <img
         ref={branchBottomRightRef}
         src={bottomRightBranch}

@@ -1,33 +1,46 @@
+// src/components/DayCards.jsx
 import React from 'react';
 import dinnerImg from '../assets/images/dinner.png';
 import hunterImg from '../assets/images/hunter.png';
 import conferenceImg from '../assets/images/conference.png';
 import chimpanzeeImg from '../assets/images/chimpanzee.png';
+import HoverOrTouchHandler from './hoverortouchhandler';
 
 const Card = ({ baseImg, hoverImg, title, date }) => {
   return (
-    <div className="relative w-78 h-78 overflow-hidden group rounded-lg shadow-lg shadow-black/40 drop">
-      <img
-        src={baseImg}
-        alt={title}
-        className="w-full h-full object-cover transition duration-300 ease-in-out group-hover:brightness-25 group-hover:blur-[1px]"
-      />
+    <HoverOrTouchHandler className="relative w-78 h-78 overflow-hidden rounded-lg shadow-lg shadow-black/40 drop">
+      {(isHovered) => (
+        <>
+          {/* Base Image */}
+          <img
+            src={baseImg}
+            alt={title}
+            className={`w-full h-full object-cover transition duration-300 ease-in-out ${
+              isHovered ? 'brightness-25 blur-[1px]' : 'brightness-100'
+            }`}
+          />
 
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 text-outline-black text-white text-center text-xl md:text-[20px] font-bold drop-shadow-lg">
-        {title}
-      </div>
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center text-lg md:text-xl">
-        {date}
-      </div>
+          {/* Title */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-outline-black text-white text-center text-xl md:text-[20px] font-bold drop-shadow-lg">
+            {title}
+          </div>
 
-      <div className="absolute inset-0 flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-        <img
-            src={hoverImg}
-            alt="hover"
-            className="w-60 h-60 object-contain"
-        />
-      </div>
-    </div>
+          {/* Date */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center text-lg md:text-xl">
+            {date}
+          </div>
+
+          {/* Hover Image Overlay */}
+          <div
+            className={`absolute inset-0 flex items-center justify-center z-10 transition duration-300 ease-in-out ${
+              isHovered ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img src={hoverImg} alt="hover" className="w-60 h-60 object-contain" />
+          </div>
+        </>
+      )}
+    </HoverOrTouchHandler>
   );
 };
 
