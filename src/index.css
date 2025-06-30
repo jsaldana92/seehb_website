@@ -7,3 +7,39 @@
 .custom-shadow-sm {
   text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);
 }
+
+.text-outline-shadow {
+  text-shadow:
+    /* Outline effect */
+    -1px -1px 0 black,
+     0px -1px 0 black,
+     1px -1px 0 black,
+    -1px  0px 0 black,
+     1px  0px 0 black,
+    -1px  1px 0 black,
+     0px  1px 0 black,
+     1px  1px 0 black,
+    -2px  0px 0 black,
+     2px  0px 0 black,
+     0px -2px 0 black,
+     0px  2px 0 black,
+
+    /* Soft drop shadow */
+     2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.text-outline-black {
+  text-shadow:
+    -1px -1px 0 black,
+     0px -1px 0 black,
+     1px -1px 0 black,
+    -1px  0px 0 black,
+     1px  0px 0 black,
+    -1px  1px 0 black,
+     0px  1px 0 black,
+     1px  1px 0 black,
+    -2px  0px 0 black,
+     2px  0px 0 black,
+     0px -2px 0 black,
+     0px  2px 0 black;
+}

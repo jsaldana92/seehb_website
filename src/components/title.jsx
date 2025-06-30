@@ -16,437 +16,170 @@ export default function Title() {
   const branchBottomRightRef = useRef();
   const sectionRef = useRef();
 
-    useEffect(() => {
-        let ctx;
+  const setupBranchAnimation = (ref, positions) => {
+    let ctx;
+    const runAnimation = () => {
+      ctx = gsap.context(() => {
+        const triggerElement = sectionRef.current;
+        const el = ref.current;
+        if (!triggerElement || !el) return;
 
-        requestAnimationFrame(() => {
-            ctx = gsap.context(() => {
-            const triggerElement = sectionRef.current;
-            if (!triggerElement || !branchRef.current) return;
+        const mm = gsap.matchMedia();
 
-            const mm = gsap.matchMedia();
+        mm.add(
+          {
+            isMobile: '(max-width: 767px)',
+            isMedium: '(min-width: 768px) and (max-width: 1023px)',
+            isDesktop: '(min-width: 1024px)',
+          },
+          (context) => {
+            const setting = context.conditions.isMobile
+              ? positions.mobile
+              : context.conditions.isMedium
+              ? positions.medium
+              : positions.desktop;
 
-                mm.add(
-                    {
-                        isMobile: '(max-width: 767px)',
-                        isMedium: '(min-width: 768px) and (max-width: 1023px)',
-                        isDesktop: '(min-width: 1024px)',
-                    },
-                    (context) => {
-                        const el = branchRef.current;
+            gsap.set(el, setting.set);
+            gsap.to(el, {
+              ...setting.to,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: triggerElement,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+                markers: false,
+              },
+            });
+          }
+        );
 
-                        if (context.conditions.isMobile) {
-                        gsap.set(el, {
-                            position: 'absolute',
-                            top: '-500px',
-                            right: '-900px',
-                            zIndex: 10,
-                            scale: 1.5,
-                        });
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 200);
+      }, sectionRef);
+    };
 
-                        gsap.to(el, {
-                            top: '0px',
-                            right: '0px',
-                            scale: 3,
-                            ease: 'power2.out',
-                            scrollTrigger: {
-                            trigger: triggerElement,
-                            start: 'top bottom',
-                            end: 'bottom top',
-                            scrub: true,
-                            markers: false,
-                            },
-                        });
-                        }
+    if (document.readyState === 'complete') {
+      setTimeout(runAnimation, 100);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(runAnimation, 100);
+      });
+    }
 
-                        if (context.conditions.isMedium) {
-                        gsap.set(el, {
-                            position: 'absolute',
-                            top: '-1200px',
-                            right: '-1400px',
-                            zIndex: 10,
-                            scale: 1.7,
-                        });
+    return () => {
+      ctx?.revert();
+      window.removeEventListener('load', runAnimation);
+    };
+  };
 
-                        gsap.to(el, {
-                            top: '0px',
-                            right: '0px',
-                            scale: 2.3,
-                            ease: 'power2.out',
-                            scrollTrigger: {
-                            trigger: triggerElement,
-                            start: 'top bottom',
-                            end: 'bottom top',
-                            scrub: true,
-                            markers: false,
-                            },
-                        });
-                        }
+  useEffect(
+    () =>
+      setupBranchAnimation(branchRef, {
+        mobile: {
+          set: { position: 'absolute', top: '-500px', right: '-900px', zIndex: 10, scale: 1.5 },
+          to: { top: '0px', right: '0px', scale: 3 },
+        },
+        medium: {
+          set: { position: 'absolute', top: '-1200px', right: '-1400px', zIndex: 10, scale: 1.7 },
+          to: { top: '0px', right: '0px', scale: 2.3 },
+        },
+        desktop: {
+          set: { position: 'absolute', top: '-1000px', right: '-2000px', zIndex: 10, scale: 2 },
+          to: { top: '0px', right: '0px', scale: 4 },
+        },
+      }),
+    []
+  );
 
-                        if (context.conditions.isDesktop) {
-                        gsap.set(el, {
-                            position: 'absolute',
-                            top: '-1000px',
-                            right: '-2000px',
-                            zIndex: 10,
-                            scale: 2,
-                        });
+  useEffect(
+    () =>
+      setupBranchAnimation(branchLeftRef, {
+        mobile: {
+          set: { position: 'absolute', top: '-500px', left: '-600px', zIndex: 10, scale: 1.5 },
+          to: { top: '0px', left: '0px', scale: 2.5 },
+        },
+        medium: {
+          set: { position: 'absolute', top: '-1000px', left: '-1200px', zIndex: 10, scale: 2 },
+          to: { top: '0px', left: '0px', scale: 2.5 },
+        },
+        desktop: {
+          set: { position: 'absolute', top: '-1000px', left: '-1100px', zIndex: 10, scale: 1.5 },
+          to: { top: '0px', left: '0px', scale: 3 },
+        },
+      }),
+    []
+  );
 
-                        gsap.to(el, {
-                            top: '0px',
-                            right: '0px',
-                            scale: 4,
-                            ease: 'power2.out',
-                            scrollTrigger: {
-                            trigger: triggerElement,
-                            start: 'top bottom',
-                            end: 'bottom top',
-                            scrub: true,
-                            markers: false,
-                            },
-                        });
-                        }
-                    }
-                );
+  useEffect(
+    () =>
+      setupBranchAnimation(branchBottomRightRef, {
+        mobile: {
+          set: { position: 'absolute', bottom: '-500px', right: '-900px', zIndex: 10, scale: 1.5 },
+          to: { bottom: '0px', right: '0px', scale: 2.5 },
+        },
+        medium: {
+          set: { position: 'absolute', bottom: '-1000px', right: '-1400px', zIndex: 10, scale: 2 },
+          to: { bottom: '0px', right: '0px', scale: 2.5 },
+        },
+        desktop: {
+          set: { position: 'absolute', bottom: '-1000px', right: '-2000px', zIndex: 10, scale: 1.5 },
+          to: { bottom: '0px', right: '0px', scale: 3.7 },
+        },
+      }),
+    []
+  );
 
-            }, sectionRef);
-        });
-
-        return () => ctx?.revert();
-    }, []);
-
-    useEffect(() => {
-        let ctx;
-
-        requestAnimationFrame(() => {
-            ctx = gsap.context(() => {
-            const triggerElement = sectionRef.current;
-            if (!triggerElement || !branchLeftRef.current) return;
-
-            const mm = gsap.matchMedia();
-
-            mm.add(
-                {
-                isMobile: '(max-width: 767px)',
-                isMedium: '(min-width: 768px) and (max-width: 1023px)',
-                isDesktop: '(min-width: 1024px)',
-                },
-                (context) => {
-                const el = branchLeftRef.current;
-
-                if (context.conditions.isMobile) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    top: '-500px',
-                    left: '-600px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    top: '0px',
-                    left: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isMedium) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    top: '-1000px',
-                    left: '-1200px',
-                    zIndex: 10,
-                    scale: 2,
-                    });
-
-                    gsap.to(el, {
-                    top: '0px',
-                    left: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isDesktop) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    top: '-1000px',
-                    left: '-1100px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    top: '0px',
-                    left: '0px',
-                    scale: 3,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-                }
-            );
-            }, sectionRef);
-        });
-
-        return () => ctx?.revert();
-    }, []);
-
-    useEffect(() => {
-        let ctx;
-
-        requestAnimationFrame(() => {
-            ctx = gsap.context(() => {
-            const triggerElement = sectionRef.current;
-            if (!triggerElement || !branchBottomRightRef.current) return;
-
-            const mm = gsap.matchMedia();
-
-            mm.add(
-                {
-                isMobile: '(max-width: 767px)',
-                isMedium: '(min-width: 768px) and (max-width: 1023px)',
-                isDesktop: '(min-width: 1024px)',
-                },
-                (context) => {
-                const el = branchBottomRightRef.current;
-
-                if (context.conditions.isMobile) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-500px',
-                    right: '-900px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    right: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isMedium) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-1000px',
-                    right: '-1400px',
-                    zIndex: 10,
-                    scale: 2,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    right: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isDesktop) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-1000px',
-                    right: '-2000px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    right: '0px',
-                    scale: 3.7,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-                }
-            );
-            }, sectionRef);
-        });
-
-        return () => ctx?.revert();
-    }, []);
-
-    useEffect(() => {
-        let ctx;
-
-        requestAnimationFrame(() => {
-            ctx = gsap.context(() => {
-            const triggerElement = sectionRef.current;
-            if (!triggerElement || !branchBottomLeftRef.current) return;
-
-            const mm = gsap.matchMedia();
-
-            mm.add(
-                {
-                isMobile: '(max-width: 767px)',
-                isMedium: '(min-width: 768px) and (max-width: 1023px)',
-                isDesktop: '(min-width: 1024px)',
-                },
-                (context) => {
-                const el = branchBottomLeftRef.current;
-
-                if (context.conditions.isMobile) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-500px',
-                    left: '-900px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    left: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isMedium) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-1000px',
-                    left: '-1200px',
-                    zIndex: 10,
-                    scale: 2,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    left: '0px',
-                    scale: 2.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-
-                if (context.conditions.isDesktop) {
-                    gsap.set(el, {
-                    position: 'absolute',
-                    bottom: '-1000px',
-                    left: '-1600px',
-                    zIndex: 10,
-                    scale: 1.5,
-                    });
-
-                    gsap.to(el, {
-                    bottom: '0px',
-                    left: '0px',
-                    scale: 3.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: triggerElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                        markers: false,
-                    },
-                    });
-                }
-                }
-            );
-            }, sectionRef);
-        });
-
-        return () => ctx?.revert();
-    }, []);
-
-
-
-
-
+  useEffect(
+    () =>
+      setupBranchAnimation(branchBottomLeftRef, {
+        mobile: {
+          set: { position: 'absolute', bottom: '-500px', left: '-900px', zIndex: 10, scale: 1.5 },
+          to: { bottom: '0px', left: '0px', scale: 2.5 },
+        },
+        medium: {
+          set: { position: 'absolute', bottom: '-1000px', left: '-1200px', zIndex: 10, scale: 2 },
+          to: { bottom: '0px', left: '0px', scale: 2.5 },
+        },
+        desktop: {
+          set: { position: 'absolute', bottom: '-1000px', left: '-1600px', zIndex: 10, scale: 1.5 },
+          to: { bottom: '0px', left: '0px', scale: 3.5 },
+        },
+      }),
+    []
+  );
 
   return (
     <section
       ref={sectionRef}
       className="relative bg-[#F6BB17] w-full min-h-[60vh] px-6 py-40 flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-between space-y-6 md:space-y-0 md:space-x-10 pointer-events-none"
     >
-      {/* Branch image */}
-        <img
-            ref={branchRef}
-            src={topRightBranch}
-            alt="Branch top right"
-            className="w-40 md:w-56 object-contain z-5"
-        />
-        <img
-            ref={branchLeftRef}
-            src={topLeftBranch}
-            alt="Branch top left"
-            className="w-40 md:w-56 object-contain z-5"
-        />
-        <img
+      <img
+        ref={branchRef}
+        src={topRightBranch}
+        alt="Branch top right"
+        className="w-40 md:w-56 object-contain z-5"
+      />
+      <img
+        ref={branchLeftRef}
+        src={topLeftBranch}
+        alt="Branch top left"
+        className="w-40 md:w-56 object-contain z-5"
+      />
+      <img
         ref={branchBottomRightRef}
         src={bottomRightBranch}
         alt="Branch bottom right"
         className="w-40 md:w-56 object-contain z-5 rotate-330"
-        />
-
-        <img
+      />
+      <img
         ref={branchBottomLeftRef}
         src={bottomLeftBranch}
         alt="Branch bottom left"
         className="w-40 md:w-56 object-contain z-5 rotate-10"
-        />
+      />
 
-      {/* Left: Logo z-10 makes the logo appear above the branches*/}
       <div className="flex-1 flex items-center justify-center z-2">
         <div className="w-full max-w-[450px] md:max-w-[650px] aspect-[3/2]">
           <img
@@ -457,7 +190,6 @@ export default function Title() {
         </div>
       </div>
 
-      {/* Right: Text */}
       <div className="flex-1 flex items-center justify-center z-10">
         <div className="flex flex-col items-center space-y-4 text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black custom-shadow">

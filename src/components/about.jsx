@@ -35,7 +35,7 @@ export default function About() {
                 { src: seehb2022, label: "2022" },
             ].map(({ src, label }) => (
             <div key={label} className="relative w-full group overflow-hidden rounded-md border-1 border-gray-200 aspect-[3/2]">
-                <img src={src} alt={`${label} SEEHB`} className="w-full h-full  object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src={src} alt={`${label} SEEHB`} className="w-full h-full  object-cover transition-transform duration-300 group-hover:scale-105 group-hover:blur-[0.8px]" />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-2xl font-bold">{label}</span>
                 </div>
@@ -47,7 +47,7 @@ export default function About() {
         <div className="grid [grid-template-columns:3fr_2fr] gap-2">
             {/* 2025 */}
             <div className="relative w-full h-full group overflow-hidden rounded-md border-1 border-gray-200">
-            <img src={seehb2025} alt="2025 SEEHB" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <img src={seehb2025} alt="2025 SEEHB" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-hover:blur-[0.8px]" />
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-2xl font-bold">2025</span>
             </div>
@@ -60,7 +60,7 @@ export default function About() {
                 { src: seehb2018, label: "2018" },
             ].map(({ src, label }) => (
                 <div key={label} className="relative w-full h-1/2 group overflow-hidden rounded-md border-1 border-gray-200">
-                <img src={src} alt={`${label} SEEHB`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src={src} alt={`${label} SEEHB`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-hover:blur-[0.8px]" />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-white text-2xl font-bold">{label}</span>
                 </div>
