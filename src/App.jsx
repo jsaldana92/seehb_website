@@ -1,14 +1,20 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './pages/home';
-
+import Schedule from './pages/schedule';
+import Media from './pages/media';
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <Router>
       <Navbar />
-      <Home />
-      {/* Other content */}
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/media" element={<Media />} />
+      </Routes>
+    </Router>
   );
 }
 
