@@ -1,14 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
-  base: "/seehb_website/",
+  base: mode === 'development' ? '/' : '/seehb_website/', // dynamic path to have npm run dev and gh-pages work
   server: {
     host: true,
     port: 5173,
     strictPort: true,
-  }
-})
+  },
+}));
