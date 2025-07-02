@@ -5,6 +5,7 @@ import scientistImage from '../assets/images/scientist.png';
 import chimpstumpImage from '../assets/images/chimp2.png';
 import centerBranch from '../assets/images/center.png';
 import TimelineSchedule from '../components/timelineschedule';
+import BottomBorder from '../components/bottomborder';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -170,6 +171,7 @@ export default function Schedule() {
 
       
       <TimelineSchedule />
+      <BottomBorder />
     </>
   );
 
