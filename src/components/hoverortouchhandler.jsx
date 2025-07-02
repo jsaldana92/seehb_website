@@ -1,8 +1,8 @@
-// src/components/HoverOrTouchHandler.jsx
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 const HoverOrTouchHandler = ({ children, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const touchMoved = useRef(false);
 
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
@@ -13,7 +13,17 @@ const HoverOrTouchHandler = ({ children, className = '' }) => {
   }, []);
 
   const handleTouchStart = useCallback(() => {
-    setIsHovered((prev) => !prev);
+    touchMoved.current = false;
+  }, []);
+
+  const handleTouchMove = useCallback(() => {
+    touchMoved.current = true;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!touchMoved.current) {
+      setIsHovered((prev) => !prev);
+    }
   }, []);
 
   return (
@@ -22,6 +32,8 @@ const HoverOrTouchHandler = ({ children, className = '' }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {children(isHovered)}
     </div>
