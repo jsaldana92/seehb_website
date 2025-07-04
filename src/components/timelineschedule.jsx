@@ -10,13 +10,17 @@ export default function TimelineSchedule() {
     setSelectedDay,
     triggerScrollToTop,
     setTriggerScrollToTop,
+    posterRedirected,
+    setPosterRedirected,
   } = useSchedule();
 
   // ✅ Trigger scroll AFTER poster view is active
   useEffect(() => {
-    if (selectedDay === 'poster') {
-      // Let PosterSession mount, then trigger scroll
-      setTimeout(() => setTriggerScrollToTop(true), 100);
+    if (selectedDay === 'poster' && posterRedirected) {
+      setTimeout(() => {
+        setTriggerScrollToTop(true);
+        setPosterRedirected(false);   // ✅ Reset the flag so manual clicks don't trigger it
+      }, 100);
     }
   }, [selectedDay]);
 

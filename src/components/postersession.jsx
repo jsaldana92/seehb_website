@@ -192,22 +192,30 @@ const ScheduleTitle = React.forwardRef(({ title, subtitle }, ref) => {
 
 ScheduleTitle.displayName = 'ScheduleTitle';
 
-export default function PosterSession() {
-  const { triggerScrollToTop, setTriggerScrollToTop } = useSchedule();
+  export default function PosterSession() {
+    const {
+    triggerScrollToTop,
+    setTriggerScrollToTop,
+    posterRedirected,
+    setPosterRedirected,
+  } = useSchedule();
+
 
   const posterHeaderRef = useRef();
   console.log("✅ Schedule context:", { triggerScrollToTop, setTriggerScrollToTop });
+  console.log("🧠 triggerScrollToTop:", triggerScrollToTop);
+  console.log("🧠 posterRedirected:", posterRedirected);
 
   useEffect(() => {
-      console.log('triggerScrollToTop', triggerScrollToTop);
-      console.log('posterHeaderRef', posterHeaderRef.current);
-    if (triggerScrollToTop && posterHeaderRef.current) {
+    if (triggerScrollToTop && posterRedirected && posterHeaderRef.current) {
       setTimeout(() => {
         posterHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
         setTriggerScrollToTop(false);
-      }, 50); // Short delay ensures DOM is mounted
+        setPosterRedirected(false); // ✅ reset to avoid triggering from Timeline button
+      }, 50);
     }
-  }, [triggerScrollToTop]);
+  }, [triggerScrollToTop, posterRedirected]);
+
   const posters = [
     {
       imgSrc: gracewhImage,

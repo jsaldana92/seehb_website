@@ -17,7 +17,7 @@ export default function BottomBorder() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={xLogo} alt="X Logo" className="h-6 w-6 hover:opacity-80 transition" />
+          <img src={xLogo} alt="X Logo" className="h-8 w-8 hover:opacity-80 transition" />
         </a>
 
         {/* Add more icons here in the future */}

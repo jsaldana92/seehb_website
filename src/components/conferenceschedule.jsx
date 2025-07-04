@@ -109,11 +109,13 @@ function SpecialTile({
   time,
   speaker = { firstName: '', lastName: '', institution: '' },
 }) {
-  const { setSelectedDay } = useSchedule();
+    const { setSelectedDay, setTriggerScrollToTop, setPosterRedirected } = useSchedule();
 
-  const handleClick = () => {
+    const handleClick = () => {
+    setPosterRedirected(true);         // ✅ Only this flow sets this flag
+    setTriggerScrollToTop(true);
     setSelectedDay('poster');
-  };
+    };
 
   return (
     <div
@@ -441,7 +443,7 @@ export default function ConferenceSchedule({ setSelectedDay }) {
       <ScheduleItem title="Poster Teasers" time="11:15 - 11:30" blockSide="right" />
       <ScheduleItem title="Lunch & Photos" time="11:30 - 12:30" blockSide="left" />
       <SpecialTile
-        setSelectedDay={setSelectedDay}
+       //setSelectedDay={setSelectedDay}
         imgSrc={femalePoster}
         presentationTitle="Poster Session"
         time="12:30 - 1:30"
