@@ -83,7 +83,7 @@ export default function BottomRSVP() {
           to: { bottom: '0px', right: '0px', scale: 2.5 },
         },
         desktop: {
-          set: { position: 'absolute', bottom: '-100px', right: '-200px', zIndex: 40, scale: 1.5 },
+          set: { position: 'absolute', bottom: '-100px', right: '-200px', zIndex: 10, scale: 1.5 },
           to: { bottom: '0px', right: '0px', scale: 3.7 },
         },
       }),
@@ -98,11 +98,11 @@ export default function BottomRSVP() {
           to: { bottom: '0px', left: '0px', scale: 2.5 },
         },
         medium: {
-          set: { position: 'absolute', bottom: '-1000px', left: '-1200px', zIndex: 30, scale: 2 },
+          set: { position: 'absolute', bottom: '-1000px', left: '-1200px', zIndex: 10, scale: 2 },
           to: { bottom: '0px', left: '0px', scale: 2.5 },
         },
         desktop: {
-          set: { position: 'absolute', bottom: '-100px', left: '-160px', zIndex: 100, scale: 1.5 },
+          set: { position: 'absolute', bottom: '-100px', left: '-160px', zIndex: 10, scale: 1.5 },
           to: { bottom: '0px', left: '0px', scale: 3.5 },
         },
       }),
@@ -112,26 +112,32 @@ export default function BottomRSVP() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#F6BB17] py-20 w-full flex flex-col items-center overflow-hidden pointer-events-none"
+      className="relative bg-[#F6BB17] py-20 w-full flex flex-col items-center overflow-hidden"
     >
       <img
         ref={branchBottomRightRef}
         src={bottomRightBranch}
         alt="Branch bottom right"
-        className="w-40 md:w-56 object-contain z-5 absolute bottom-0 right-0"
+        className="w-40 md:w-56 object-contain z-5 absolute bottom-0 right-0  pointer-events-none"
       />
       <img
         ref={branchBottomLeftRef}
         src={bottomLeftBranch}
         alt="Branch bottom left"
-        className="w-40 md:w-56 object-contain z-5 absolute bottom-0 left-0"
+        className="w-40 md:w-56 object-contain z-5 absolute bottom-0 left-0  pointer-events-none"
       />
       <h2 className="text-2xl md:text-3xl font-bold custom-shadow text-black text-center mb-6 z-10">
         Let us know if you'll be attending!
       </h2>
-      <button className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 transition z-10">
-        RSVP
-      </button>
+      
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLScdv5FYKN7_3Un1v6NNrW4kHo5JV90EYUeBYahvrSJUGuAP8A/viewform"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200 z-20 pointer-events-auto"
+    >
+      RSVP
+    </a>
     </section>
   );
 }

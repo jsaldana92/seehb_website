@@ -5,7 +5,7 @@ const ScheduleContext = createContext();
 export function ScheduleProvider({ children }) {
   const [selectedDay, setSelectedDay] = useState('dinner');
   const [triggerScrollToTop, setTriggerScrollToTop] = useState(false);
-  const [posterRedirected, setPosterRedirected] = useState(false); // ✅ move inside here
+  const [posterRedirected, setPosterRedirected] = useState(false);
 
   return (
     <ScheduleContext.Provider

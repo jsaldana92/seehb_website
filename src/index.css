@@ -43,15 +43,12 @@
      0px -2px 0 black,
      0px  2px 0 black;
 }
-.my-masonry-grid {
-  display: flex;
-  margin-left: -1rem; /* gutter offset */
-  width: auto;
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
-.my-masonry-grid_column {
-  padding-left: 1rem; /* gutter */
-  background-clip: padding-box;
-}
-.my-masonry-grid_column > img {
-  margin-bottom: 1rem;
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
 }

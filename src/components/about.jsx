@@ -62,7 +62,6 @@ export default function About() {
                       <img src={xLogo} alt="X Logo" className="h-10 w-10 hover:opacity-80 transition" />
                     </a>
                   </div>
-                  
                   {/* Add more icons here in the future */}
                 </section>
           </div>
