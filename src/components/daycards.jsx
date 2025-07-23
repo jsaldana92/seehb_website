@@ -1,17 +1,21 @@
-// src/components/DayCards.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import dinnerImg from '../assets/images/dinner.png';
 import hunterImg from '../assets/images/hunter.png';
 import conferenceImg from '../assets/images/conference.png';
 import chimpanzeeImg from '../assets/images/chimpanzee.png';
 import HoverOrTouchHandler from './hoverortouchhandler';
+import { useSchedule } from '../components/schedulecontext';
+import { useConferenceScroll } from './conferencescrollcontext';
 
-const Card = ({ baseImg, hoverImg, title, date }) => {
-  return (
-    <HoverOrTouchHandler className="relative w-78 h-78 overflow-hidden rounded-lg shadow-lg shadow-black/40 drop">
+const Card = ({ baseImg, hoverImg, title, date, onClick }) => (
+  <div onClick={onClick} className="cursor-pointer">
+    <HoverOrTouchHandler
+      className="relative w-78 h-78 overflow-hidden rounded-lg shadow-lg shadow-black/40 drop cursor-pointer"
+      onClick={onClick}
+    >
       {(isHovered) => (
         <>
-          {/* Base Image */}
           <img
             src={baseImg}
             alt={title}
@@ -19,18 +23,12 @@ const Card = ({ baseImg, hoverImg, title, date }) => {
               isHovered ? 'brightness-25 blur-[1px]' : 'brightness-100'
             }`}
           />
-
-          {/* Title */}
           <div className="absolute top-4 left-1/2 -translate-x-1/2 text-outline-black text-white text-center text-xl md:text-[20px] font-bold drop-shadow-lg">
             {title}
           </div>
-
-          {/* Date */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center text-lg md:text-xl">
             {date}
           </div>
-
-          {/* Hover Image Overlay */}
           <div
             className={`absolute inset-0 flex items-center justify-center z-10 transition duration-300 ease-in-out ${
               isHovered ? 'opacity-100' : 'opacity-0'
@@ -41,10 +39,31 @@ const Card = ({ baseImg, hoverImg, title, date }) => {
         </>
       )}
     </HoverOrTouchHandler>
-  );
-};
+  </div>
+);
 
 export default function DayCards() {
+  const navigate = useNavigate();
+  const { setSelectedDay } = useSchedule();
+  const {
+    setTriggerConferenceScroll,
+    setConferenceRedirected,
+    setSelectedDay: setConfDay,
+  } = useConferenceScroll();
+
+  const goToDay = (day) => {
+     setSelectedDay(day); 
+    if (day === 'conference') {
+      setConfDay(day);
+      setTriggerConferenceScroll(true);
+      setConferenceRedirected(true);
+    } else {
+      setSelectedDay(day); // Handle 'dinner' or others
+    }
+
+    navigate('/schedule');
+  };
+
   return (
     <section className="bg-[#F6BB17] w-full py-20 flex flex-col items-center justify-center">
       <div className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-30">
@@ -53,12 +72,14 @@ export default function DayCards() {
           hoverImg={hunterImg}
           title="Opening Dinner"
           date="February 7th"
+          onClick={() => goToDay('dinner')}
         />
         <Card
           baseImg={conferenceImg}
           hoverImg={chimpanzeeImg}
           title="Conference"
           date="February 8th"
+          onClick={() => goToDay('conference')}
         />
       </div>
     </section>

@@ -1,14 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import HoverOrTouchHandler from './hoverortouchhandler';
-import scientistImage from '../assets/images/scientist.png'
-import amberImage from '../assets/presenters/amber.png'
-import danImage from '../assets/presenters/dan.png'
-import dorothyImage from '../assets/presenters/dorothy.png'
-import fedeImage from '../assets/presenters/fede.png'
-import gracewhImage from '../assets/presenters/gracewh.png'
-import phoenixImage from '../assets/presenters/phoenix.png'
+import scientistImage from '../assets/images/scientist.png';
+import amberImage from '../assets/presenters/amber.png';
+import danImage from '../assets/presenters/dan.png';
+import dorothyImage from '../assets/presenters/dorothy.png';
+import fedeImage from '../assets/presenters/fede.png';
+import gracewhImage from '../assets/presenters/gracewh.png';
+import phoenixImage from '../assets/presenters/phoenix.png';
 import { useSchedule } from '../components/schedulecontext';
 
+const ScheduleTitle = React.forwardRef(({ title, subtitle }, ref) => (
+  <div ref={ref} className="w-full flex flex-col items-center my-8 px-6">
+    <div className="w-full max-w-xl h-px bg-black mb-4"></div>
+    <h2 className="text-2xl md:text-4xl font-semibold text-black text-center">{title}</h2>
+    {subtitle && <p className="text-md md:text-lg font-medium text-[#00B050] text-center mt-2">{subtitle}</p>}
+    <div className="w-full max-w-xl h-px bg-black mt-4"></div>
+  </div>
+));
+
+ScheduleTitle.displayName = 'ScheduleTitle';
 
 function SpeakerTile({
   imgSrc = scientistImage,
@@ -27,98 +37,49 @@ function SpeakerTile({
 
   if (showDetails) {
     return (
-        <div
-        className={`w-full flex flex-col md:flex-row ${
-            isLeft ? '' : 'md:flex-row-reverse'
-        } items-center justify-center my-8 gap-6 px-4`}
-        >
-        {/* Hoverable Speaker Image with Overlay */}
+      <div className={`w-full flex flex-col md:flex-row ${isLeft ? '' : 'md:flex-row-reverse'} items-center justify-center my-8 gap-6 px-4`}>
         <HoverOrTouchHandler>
-            {(isHovered) => (
+          {(isHovered) => (
             <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 drop-shadow-xl">
-                <img
-                src={imgSrc}
-                alt={imgAlt}
-                className={`w-full h-full object-cover rounded-lg transition duration-300 ${
-                    isHovered ? 'brightness-25' : 'brightness-100'
-                }`}
-                />
-                {isHovered && (
-                <div
-                    className={`absolute bottom-2 ${
-                    isLeft ? 'left-2 text-left' : 'right-2 text-right'
-                    } text-white text-md font-semibold space-y-1 px-1 py-1`}
-                >
-                    <p>{hoverSpeaker.firstName}</p>
-                    <p>{hoverSpeaker.lastName}</p>
-                    <p className="text-xs">{hoverSpeaker.institution}</p>
+              <img src={imgSrc} alt={imgAlt} className={`w-full h-full object-cover rounded-lg transition duration-300 ${isHovered ? 'brightness-25' : 'brightness-100'}`} />
+              {isHovered && (
+                <div className={`absolute bottom-2 ${isLeft ? 'left-2 text-left' : 'right-2 text-right'} text-white text-md font-semibold space-y-1 px-1 py-1`}>
+                  <p>{hoverSpeaker.firstName}</p>
+                  <p>{hoverSpeaker.lastName}</p>
+                  <p className="text-xs">{hoverSpeaker.institution}</p>
                 </div>
-                )}
+              )}
             </div>
-            )}
+          )}
         </HoverOrTouchHandler>
 
-        {/* Abstract Content */}
         <div className="flex flex-col items-center bg-white rounded-xl shadow-md p-6 w-full max-w-3xl">
-            <h2 className="text-2xl font-bold text-center mb-2">{abstractTitle}</h2>
-
-            <p className="text-md text-gray-800 font-semibold text-center">
+          <h2 className="text-2xl font-bold text-center mb-2">{abstractTitle}</h2>
+          <p className="text-md text-gray-800 font-semibold text-center">
             {authors.map((author, i) => (
-                <span key={i}>
-                {author.name}
-                <sup>{author.affiliationNumber}</sup>
-                {i < authors.length - 1 ? ', ' : ''}
-                </span>
+              <span key={i}>{author.name}<sup>{author.affiliationNumber}</sup>{i < authors.length - 1 ? ', ' : ''}</span>
             ))}
-            </p>
-
-            <p className="text-sm text-gray-600 italic text-center mt-2 mb-4">
+          </p>
+          <p className="text-sm text-gray-600 italic text-center mt-2 mb-4">
             {institutions.map((inst, i) => (
-                <span key={i}>
-                <sup>{inst.number}</sup> {inst.name}
-                {i < institutions.length - 1 ? '; ' : ''}
-                </span>
+              <span key={i}><sup>{inst.number}</sup> {inst.name}{i < institutions.length - 1 ? '; ' : ''}</span>
             ))}
-            </p>
-
-            <p className="text-md text-black mt-2 text-center">{abstractText}</p>
-
-            <button
-            onClick={() => setShowDetails(false)}
-            className="mt-6 px-4 py-2 bg-[#F6BB17] text-black font-bold rounded-full hover:bg-yellow-400"
-            >
-            Close Abstract
-            </button>
+          </p>
+          <p className="text-md text-black mt-2 text-center">{abstractText}</p>
+          <button onClick={() => setShowDetails(false)} className="mt-6 px-4 py-2 bg-[#F6BB17] text-black font-bold rounded-full hover:bg-yellow-400">Close Abstract</button>
         </div>
-        </div>
+      </div>
     );
   }
 
-
-
   return (
-    <div
-      className={`w-full flex flex-col md:flex-row ${
-        isLeft ? '' : 'md:flex-row-reverse'
-      } items-center justify-center my-8 gap-6 px-4`}
-    >
-      {/* Image with hover overlay */}
+    <div className={`w-full flex flex-col md:flex-row ${isLeft ? '' : 'md:flex-row-reverse'} items-center justify-center my-8 gap-6 px-4`}>
       <HoverOrTouchHandler>
         {(isHovered) => (
           <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 drop-shadow-xl">
-            <img
-              src={imgSrc}
-              alt={imgAlt}
-              className={`w-full h-full object-cover rounded-lg transition duration-300 ${
-                isHovered ? 'brightness-25' : 'brightness-100'
-              }`}
-            />
+            <img src={imgSrc} alt={imgAlt} className={`w-full h-full object-cover rounded-lg transition duration-300 ${isHovered ? 'brightness-25' : 'brightness-100'}`} />
             {isHovered && (
-              <div
-                className={`absolute bottom-2 ${
-                  isLeft ? 'left-2 text-left' : 'right-2 text-right'
-                } text-white text-md font-semibold space-y-1 px-1 py-1`}
-              >
+              <div className={`absolute bottom-2 ${isLeft ? 'left-2 text-left' : 'right-2 text-right'} text-white text-md font-semibold space-y-1 px-1 py-1`}>
                 <p>{hoverSpeaker.firstName}</p>
                 <p>{hoverSpeaker.lastName}</p>
                 <p className="text-xs">{hoverSpeaker.institution}</p>
@@ -127,14 +88,7 @@ function SpeakerTile({
           </div>
         )}
       </HoverOrTouchHandler>
-
-      {/* White square box */}
-      <div
-        className={`cursor-pointer bg-white rounded-[25px] p-4 shadow-md text-black text-center ${
-          isLeft ? 'sm:text-left' : 'sm:text-right'
-        } w-[260px] sm:w-[300px] md:w-[360px] lg:w-[1020px]`}
-        onClick={() => setShowDetails(true)}
-      >
+      <div className={`cursor-pointer bg-white rounded-[25px] p-4 shadow-md text-black text-center ${isLeft ? 'sm:text-left' : 'sm:text-right'} w-[260px] sm:w-[300px] md:w-[360px] lg:w-[1020px]`} onClick={() => setShowDetails(true)}>
         <h3 className="text-lg font-bold leading-snug">{presentationTitle}</h3>
         <p className="text-md font-semibold text-[#00B050] mt-2">{time}</p>
       </div>
@@ -142,72 +96,41 @@ function SpeakerTile({
   );
 }
 
-function ScheduleItem({ title, time, blockSide = 'left' }) {
-  const isLeft = blockSide === 'left';
-  const flexDirection = isLeft ? 'flex-row' : 'flex-row-reverse';
-  const alignTime = isLeft ? 'text-left' : 'text-right';
-
-  return (
-    <div className="w-full flex justify-center my-6 px-6">
-      <div className={`flex ${flexDirection} items-start`}>
-        {/* Gray block */}
-        <div className="w-3 h-full bg-[#636363]"></div>
-
-        {/* Text block directly hugging the gray block */}
-        <div className={`ml-2 mr-2`}>
-          <h2 className="text-2xl font-semibold text-black">{title}</h2>
-          <p className={`text-md font-semibold text-[#00B050] mt-1 ${alignTime}`}>
-            {time}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-const ScheduleTitle = React.forwardRef(({ title, subtitle }, ref) => {
-  return (
-    <div ref={ref} className="w-full flex flex-col items-center my-8 px-6">
-      {/* Top Line */}
-      <div className="w-full max-w-xl h-px bg-black mb-4"></div>
-
-      {/* Title */}
-      <h2 className="text-2xl md:text-4xl font-semibold text-black text-center">
-        {title}
-      </h2>
-
-      {/* Optional Subtitle */}
-      {subtitle && (
-        <p className="text-md md:text-lg font-medium text-[#00B050] text-center mt-2">
-          {subtitle}
-        </p>
-      )}
-
-      {/* Bottom Line */}
-      <div className="w-full max-w-xl h-px bg-black mt-4"></div>
-    </div>
-  );
-});
-
-ScheduleTitle.displayName = 'ScheduleTitle';
-
 export default function PosterSession() {
-  const { triggerScrollToTop, setTriggerScrollToTop } = useSchedule();
+  const {
+    triggerScrollToTop,
+    setTriggerScrollToTop,
+    posterRedirected,
+    setPosterRedirected,
+  } = useSchedule();
 
   const posterHeaderRef = useRef();
-  console.log("✅ Schedule context:", { triggerScrollToTop, setTriggerScrollToTop });
 
   useEffect(() => {
-      console.log('triggerScrollToTop', triggerScrollToTop);
-      console.log('posterHeaderRef', posterHeaderRef.current);
-    if (triggerScrollToTop && posterHeaderRef.current) {
-      setTimeout(() => {
-        posterHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
-        setTriggerScrollToTop(false);
-      }, 50); // Short delay ensures DOM is mounted
+    if (triggerScrollToTop && posterRedirected && posterHeaderRef.current) {
+      let lastTop = -1;
+      let stableCount = 0;
+      const maxStableChecks = 5;
+
+      const intervalId = setInterval(() => {
+        const top = posterHeaderRef.current.getBoundingClientRect().top;
+        if (top === lastTop) {
+          stableCount++;
+        } else {
+          stableCount = 0;
+          lastTop = top;
+        }
+
+        if (stableCount >= maxStableChecks) {
+          clearInterval(intervalId);
+          posterHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
+          setTriggerScrollToTop(false);
+          setPosterRedirected(false);
+        }
+      }, 50);
     }
-  }, [triggerScrollToTop]);
+  }, [triggerScrollToTop, posterRedirected]);
+
   const posters = [
     {
       imgSrc: gracewhImage,
@@ -301,32 +224,15 @@ export default function PosterSession() {
 
     return (
     <div className="w-full flex flex-col items-center px-4 py-12 bg-[#F0F0F0]">
-        <ScheduleTitle title="Poster Session" subtitle="12:30 – 1:30" ref={posterHeaderRef} />
-
-
-        {Array.from({ length: 3 }).map((_, i) => (
-        <div
-            key={i}
-            className="w-full flex flex-col lg:flex-row justify-between items-stretch mb-12 gap-6"
-        >
-            {/* Divider BEFORE first tile, but only for rows 2 and 3 */}
-            {i !== 0 && (
-            <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4 self-center"></div>
-            )}
-
-            <div className="lg:w-1/2">
-            <SpeakerTile {...posters[i * 2]} align="left" />
-            </div>
-
-            {/* Divider BETWEEN the two tiles (mobile only) */}
-            <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4 self-center"></div>
-
-            <div className="lg:w-1/2">
-            <SpeakerTile {...posters[i * 2 + 1]} align="right" />
-            </div>
+      <ScheduleTitle title="Poster Session" subtitle="12:30 – 1:30" ref={posterHeaderRef} />
+      {Array.from({ length: 3 }).map((_, i) => (
+        <div key={i} className="w-full flex flex-col lg:flex-row justify-between items-stretch mb-12 gap-6">
+          {i !== 0 && <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4 self-center"></div>}
+          <div className="lg:w-1/2"><SpeakerTile {...posters[i * 2]} align="left" /></div>
+          <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4 self-center"></div>
+          <div className="lg:w-1/2"><SpeakerTile {...posters[i * 2 + 1]} align="right" /></div>
         </div>
-        ))}
+      ))}
     </div>
-    );
-
+  );
 }

@@ -191,16 +191,21 @@ export default function Title() {
       </div>
 
       <div className="flex-1 flex items-center justify-center z-10">
-        <div className="flex flex-col items-center space-y-4 text-center">
+        <div className="flex flex-col items-center space-y-4 text-center pointer-events-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black custom-shadow">
             Join us Feb 7th to 8th, 2025
           </h1>
           <h2 className="text-xl md:text-2xl text-white drop-shadow-2xl custom-shadow">
             at Indian Creek Lodge, Georgia State University
           </h2>
-          <button className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 transition">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLScdv5FYKN7_3Un1v6NNrW4kHo5JV90EYUeBYahvrSJUGuAP8A/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200"
+          >
             RSVP
-          </button>
+          </a>
         </div>
       </div>
     </section>

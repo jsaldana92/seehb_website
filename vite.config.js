@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
-  base: mode === 'development' ? '/' : '/seehb_website/', // dynamic path to have npm run dev and gh-pages work
+  base: '/',
   server: {
     host: true,
     port: 5173,

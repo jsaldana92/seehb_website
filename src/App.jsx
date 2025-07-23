@@ -5,10 +5,14 @@ import Home from './pages/home';
 import Schedule from './pages/schedule';
 import Media from './pages/media';
 import { ScheduleProvider } from './components/schedulecontext';
+import { ConferenceScrollProvider } from './components/conferencescrollcontext';
+
 
 function App() {
   return (
+    <ConferenceScrollProvider>
     <ScheduleProvider>
+      
       <Router>
         <Navbar />
         <Routes>
@@ -17,7 +21,9 @@ function App() {
           <Route path="/media" element={<Media />} />
         </Routes>
       </Router>
+      
     </ScheduleProvider>
+    </ConferenceScrollProvider>
 
   );
 }

@@ -1,6 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import { useSchedule } from '../components/schedulecontext';
+import { useRef, useEffect } from 'react';
+import { useConferenceScroll } from './conferencescrollcontext';
+
 
 import HoverOrTouchHandler from './hoverortouchhandler';
 import rohiniImage from '../assets/presenters/rohini.png';
@@ -14,6 +17,8 @@ import mistryImage from '../assets/presenters/mistry.png'
 import graceImage from '../assets/presenters/grace.png'
 import giulianaImage from '../assets/presenters/giuliana.png'
 import amandaImage from '../assets/presenters/amanda.png'
+
+
 
 function KeynoteTile({
   imgSrc = scientistImage,
@@ -109,11 +114,13 @@ function SpecialTile({
   time,
   speaker = { firstName: '', lastName: '', institution: '' },
 }) {
-  const { setSelectedDay } = useSchedule();
+    const { setSelectedDay, setTriggerScrollToTop, setPosterRedirected } = useSchedule();
 
-  const handleClick = () => {
+    const handleClick = () => {
+    setPosterRedirected(true);         // ✅ Only this flow sets this flag
+    setTriggerScrollToTop(true);
     setSelectedDay('poster');
-  };
+    };
 
   return (
     <div
@@ -326,11 +333,56 @@ function ScheduleTitle({ title }) {
   );
 }
 
-export default function ConferenceSchedule({ setSelectedDay }) {
+export default function ConferenceSchedule() {
+
+  const conferenceHeaderRef = useRef();
+    const {
+    triggerConferenceScroll,
+    setTriggerConferenceScroll,
+    conferenceRedirected,
+    setConferenceRedirected,
+    selectedDay,
+  } = useConferenceScroll();
+
+  useEffect(() => {
+    if (
+      selectedDay === 'conference' &&
+      triggerConferenceScroll &&
+      conferenceRedirected &&
+      conferenceHeaderRef.current
+    ) {
+      let lastTop = -1;
+      let stableCount = 0;
+      const maxStableChecks = 5; // how many consistent readings = "stable"
+      const interval = 50;       // ms between checks
+
+      const intervalId = setInterval(() => {
+        const top = conferenceHeaderRef.current.getBoundingClientRect().top;
+
+        if (top === lastTop) {
+          stableCount++;
+        } else {
+          stableCount = 0;
+          lastTop = top;
+        }
+
+        if (stableCount >= maxStableChecks) {
+          clearInterval(intervalId);
+          conferenceHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
+          setTriggerConferenceScroll(false);
+          setConferenceRedirected(false);
+        }
+      }, interval);
+
+      return () => clearInterval(intervalId); // cleanup
+    }
+}, [triggerConferenceScroll, conferenceRedirected, selectedDay]);
+
+  
   return (
     <div className="w-full bg-[#F0F0F0] py-12 flex flex-col items-center">
       {/* Title */}
-      <div className="text-center mb-4 px-4">
+      <div ref={conferenceHeaderRef} className=" text-center mb-4 px-4">
         <h1 className="text-black text-3xl font-bold inline-block px-4 py-2">
           Indian Creek Lodge
         </h1>
@@ -441,7 +493,7 @@ export default function ConferenceSchedule({ setSelectedDay }) {
       <ScheduleItem title="Poster Teasers" time="11:15 - 11:30" blockSide="right" />
       <ScheduleItem title="Lunch & Photos" time="11:30 - 12:30" blockSide="left" />
       <SpecialTile
-        setSelectedDay={setSelectedDay}
+       //setSelectedDay={setSelectedDay}
         imgSrc={femalePoster}
         presentationTitle="Poster Session"
         time="12:30 - 1:30"

@@ -203,9 +203,14 @@ export default function SteeringCommittee2() {
       <h2 className="text-2xl md:text-3xl font-bold custom-shadow text-black text-center mt-48 mb-6 z-10">
         Let us know if you'll be attending!
       </h2>
-      <button className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 transition z-10">
-        RSVP
-      </button>
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLScdv5FYKN7_3Un1v6NNrW4kHo5JV90EYUeBYahvrSJUGuAP8A/viewform"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200 z-10 pointer-events-auto"
+    >
+      RSVP
+    </a>
     </section>
   );
 }

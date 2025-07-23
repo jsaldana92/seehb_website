@@ -19,7 +19,7 @@ export default function Navbar() {
         <img src={seehbLogo} alt="SEEH Logo" className="h-10" />
 
         <button
-          className={`md:hidden flex flex-col space-y-1 p-2 rounded ${isOpen ? 'bg-gray-200' : ''}`}
+          className="md:hidden flex flex-col space-y-1 p-2 rounded active:scale-95 active:bg-white/30 transition-all duration-150"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="w-6 h-0.5 bg-white"></span>
@@ -56,15 +56,15 @@ export default function Navbar() {
 
         {/* Mobile Nav */}
         {isOpen && (
-          <ul className="absolute top-14 right-0 bg-[#737373]/70 rounded shadow-lg py-2 px-4 space-y-2 w-40 md:hidden z-10">
+          <ul className="absolute top-14 right-0 bg-[#737373]/70 rounded shadow-lg py-2 space-y-1 w-40 md:hidden z-10">
             {navItems.map(({ name, path, external }) => (
-              <li key={name}>
+              <li key={name} className="w-full">
                 {external ? (
                   <a
                     href={path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base cursor-pointer text-white drop-shadow-md opacity-60 hover:opacity-100 transition-opacity duration-200"
+                    className="block w-full text-left px-4 py-2 text-white text-base opacity-60 hover:opacity-100 active:bg-[#505050]/70 hover:bg-[#505050]/50 active:scale-[0.98] transition-all duration-150"
                   >
                     {name}
                   </a>
@@ -72,8 +72,8 @@ export default function Navbar() {
                   <Link
                     to={path}
                     onClick={() => setIsOpen(false)}
-                    className={`text-base cursor-pointer text-white drop-shadow-md transition-opacity duration-200 ${
-                      location.pathname === path ? 'opacity-100' : 'opacity-60'
+                    className={`block w-full text-left px-4 py-2 text-white text-base opacity-60 hover:opacity-100 active:bg-[#505050]/70 hover:bg-[#505050]/50 active:scale-[0.98] transition-all duration-150 ${
+                      location.pathname === path ? 'opacity-100' : ''
                     }`}
                   >
                     {name}
@@ -83,6 +83,7 @@ export default function Navbar() {
             ))}
           </ul>
         )}
+
       </div>
     </nav>
   );
