@@ -19,32 +19,43 @@ const normalizePath = (rawPath) => {
   return rawPath;
 };
 
+// Optional: route -> title mapping for GA
+const titleFor = (path) => {
+  const map = {
+    "/": "SEEHB | Home",
+    "/schedule": "SEEHB | Schedule",
+    "/media": "SEEHB | Media",
+  };
+  return map[path] || `SEEHB | ${path}`;
+};
+
 const sendPageView = (normalizedPath) => {
   if (!window.gtag) return;
 
-  // Send GA4 page_view event manually
+  const page_title = titleFor(normalizedPath);
+  const page_location = `https://www.seehb.org${normalizedPath}`; // canonical (no hash)
+
   window.gtag("event", "page_view", {
-    page_title: document.title,
-    page_location: window.location.href,
+    page_title,
+    page_location,
     page_path: normalizedPath,
   });
 
-  // Also update GA’s config to keep session tracking correct
+  // Keep GA internal state aligned (helps with session attribution)
   window.gtag("config", "G-6873JN8D0J", {
     page_path: normalizedPath,
+    page_title,
   });
 };
 
 function PageTracker() {
   const location = useLocation();
-
   useEffect(() => {
     const { pathname, search, hash } = window.location;
     const rawPath = `${pathname}${search}${hash || ""}`;
     const normalized = normalizePath(rawPath);
     sendPageView(normalized);
   }, [location.pathname, location.search, location.hash]);
-
   return null;
 }
 
@@ -53,7 +64,7 @@ function App() {
     <ConferenceScrollProvider>
       <ScheduleProvider>
         <Router>
-          <PageTracker /> {/* Tracks page views */}
+          <PageTracker />
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
