@@ -342,7 +342,7 @@ export default function SteeringCommittee2() {
             required
             inputMode="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="please enter your email..."
             className="w-full sm:flex-1 px-4 py-3 rounded-md border bg-[#fcfcfc] border-black/20 shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 text-black placeholder-black/60"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
