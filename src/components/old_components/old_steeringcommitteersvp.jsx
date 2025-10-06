@@ -1,5 +1,5 @@
 // src/components/steeringcommittee.jsx
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverOrTouchHandler from "./hoverortouchhandler";
@@ -21,12 +21,6 @@ import bottomLeftBranch from "../assets/images/bottom_left.png";
 import bottomRightBranch from "../assets/images/bottom_right.png";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ===== Email capture backend (same as Title.jsx) =====
-const ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbyrghtwduUvUfmAt20eBkJURnUuskqRgdBKAJm6EuUZiHHxBOvjLY-EM4JdhPWwncPE/exec";
-const APP_TOKEN =
-  "kbhkjb-92nujbnjiuyb05-kjbkjhb-05-beo-354lkjbhdifd23-w-5454kljabscikuhjb-ulf-334"; // (tip: avoid slashes)
 
 const committee = [
   {
@@ -71,45 +65,6 @@ export default function SteeringCommittee2() {
   const branchBottomLeftRef = useRef();
   const branchBottomRightRef = useRef();
 
-  // ---- local email form state (compact) ----
-  const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [honey, setHoney] = useState("");
-
-  const isValidEmail = (v) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).toLowerCase());
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (honey.trim()) {
-      setMsg("");
-      setEmail("");
-      return;
-    } // silent success for bots
-    if (!isValidEmail(email)) {
-      setMsg("Please enter a valid email.");
-      return;
-    }
-
-    setLoading(true);
-    setMsg("");
-    try {
-      await fetch(ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=UTF-8" },
-        body: JSON.stringify({ email: email.toLowerCase(), token: APP_TOKEN }),
-      });
-      setEmail("");
-      setMsg("Thanks! You’re on the list.");
-    } catch {
-      setMsg("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   const setupBranchAnimation = (ref, positions) => {
     let ctx;
     const runAnimation = () => {
@@ -119,6 +74,7 @@ export default function SteeringCommittee2() {
         if (!triggerElement || !el) return;
 
         const mm = gsap.matchMedia();
+
         mm.add(
           {
             isMobile: "(max-width: 767px)",
@@ -146,14 +102,20 @@ export default function SteeringCommittee2() {
             });
           }
         );
+
         setTimeout(() => {
           ScrollTrigger.refresh();
         }, 200);
       }, sectionRef);
     };
 
-    if (document.readyState === "complete") setTimeout(runAnimation, 100);
-    else window.addEventListener("load", () => setTimeout(runAnimation, 100));
+    if (document.readyState === "complete") {
+      setTimeout(runAnimation, 100);
+    } else {
+      window.addEventListener("load", () => {
+        setTimeout(runAnimation, 100);
+      });
+    }
 
     return () => {
       ctx?.revert();
@@ -248,19 +210,16 @@ export default function SteeringCommittee2() {
       </div>
 
       {/* Committee Grid */}
-      <div className="mt-4 flex flex-wrap gap-6 justify-center">
+      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 justify-center">
         {committee.map((person, idx) => (
           <HoverOrTouchHandler key={idx}>
             {(isHovered) => (
               <div className="relative w-40 aspect-square group overflow-hidden rounded shadow-lg cursor-pointer">
-                {/* Member photo (base layer) */}
                 <img
                   src={person.img}
                   alt={`${person.first} ${person.last}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition duration-300 ease-in-out"
                 />
-
-                {/* Institution overlay on hover */}
                 {person.logo && (
                   <div
                     className={`absolute inset-0 transition duration-300 ease-in-out ${
@@ -279,8 +238,6 @@ export default function SteeringCommittee2() {
                     </div>
                   </div>
                 )}
-
-                {/* Name (shown when not hovered) */}
                 <div
                   className={`absolute bottom-2 right-2 text-md custom-shadow text-white text-right transition-opacity duration-300 ease-in-out ${
                     isHovered ? "opacity-0" : "opacity-100"
@@ -299,7 +256,7 @@ export default function SteeringCommittee2() {
         ))}
       </div>
 
-      {/* ===== Compact email sign-up (replaces old RSVP block) ===== */}
+      {/* RSVP Section */}
       <img
         ref={branchBottomRightRef}
         src={bottomRightBranch}
@@ -312,52 +269,17 @@ export default function SteeringCommittee2() {
         alt="Branch bottom left"
         className="w-40 md:w-56 object-contain z-5 absolute bottom-0 left-0 pointer-events-none"
       />
-
-      <div className="mt-48 z-10 w-full flex flex-col items-center gap-3 pointer-events-auto">
-        <h3 className="text-xl md:text-2xl font-bold custom-shadow text-black text-center">
-          Stay in the loop — drop your email
-        </h3>
-
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-md flex flex-col sm:flex-row gap-3 items-center justify-center"
-        >
-          {/* Honeypot */}
-          <input
-            type="text"
-            name="website"
-            autoComplete="off"
-            tabIndex="-1"
-            className="hidden"
-            value={honey}
-            onChange={(e) => setHoney(e.target.value)}
-          />
-
-          <label htmlFor="sc-email" className="sr-only">
-            Email address
-          </label>
-          <input
-            id="sc-email"
-            type="email"
-            required
-            inputMode="email"
-            autoComplete="email"
-            placeholder="you@example.com"
-            className="w-full sm:flex-1 px-4 py-3 rounded-md border bg-[#fcfcfc] border-black/20 shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 text-black placeholder-black/60"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-white text-black font-semibold px-6 py-3 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-60 disabled:hover:scale-100"
-          >
-            {loading ? "Signing…" : "Sign Up"}
-          </button>
-        </form>
-
-        {msg && <p className="text-sm text-black/80">{msg}</p>}
-      </div>
+      <h2 className="text-2xl md:text-3xl font-bold custom-shadow text-black text-center mt-48 mb-6 z-10">
+        Let us know if you'll be attending!
+      </h2>
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLScdv5FYKN7_3Un1v6NNrW4kHo5JV90EYUeBYahvrSJUGuAP8A/viewform"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200 z-10 pointer-events-auto"
+      >
+        RSVP
+      </a>
     </section>
   );
 }
