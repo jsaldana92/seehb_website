@@ -1,5 +1,5 @@
 // src/components/Title.jsx
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import seehbLogo from "../assets/logos/seehb_logo.png";
@@ -30,16 +30,25 @@ export default function Title() {
   const [status, setStatus] = useState({ state: "idle", message: "" }); // idle | loading | success | error
   const [honey, setHoney] = useState(""); // honeypot (bots fill this, humans don't)
 
+  useLayoutEffect(() => {
+    // hide section before paint
+    gsap.set(sectionRef.current, { autoAlpha: 0 });
+    // reveal once everything is positioned (next frame)
+    requestAnimationFrame(() => {
+      gsap.to(sectionRef.current, { autoAlpha: 1, duration: 0 });
+    });
+  }, []);
+
   const setupBranchAnimation = (ref, positions) => {
     let ctx;
-    const runAnimation = () => {
+    useLayoutEffect(() => {
       ctx = gsap.context(() => {
         const triggerElement = sectionRef.current;
         const el = ref.current;
         if (!triggerElement || !el) return;
 
+        // Choose settings by breakpoint
         const mm = gsap.matchMedia();
-
         mm.add(
           {
             isMobile: "(max-width: 767px)",
@@ -53,7 +62,16 @@ export default function Title() {
               ? positions.medium
               : positions.desktop;
 
-            gsap.set(el, setting.set);
+            // 1) Set initial state BEFORE reveal (avoid flash)
+            gsap.set(el, {
+              ...setting.set,
+              willChange: "transform",
+            });
+
+            // reveal this element now that it's positioned
+            gsap.set(el, { autoAlpha: 1 });
+
+            // 2) Animate
             gsap.to(el, {
               ...setting.to,
               ease: "power2.out",
@@ -68,173 +86,172 @@ export default function Title() {
           }
         );
 
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 200);
+        ScrollTrigger.refresh();
       }, sectionRef);
-    };
 
-    if (document.readyState === "complete") {
-      setTimeout(runAnimation, 100);
-    } else {
-      window.addEventListener("load", () => {
-        setTimeout(runAnimation, 100);
-      });
-    }
-
-    return () => {
-      ctx?.revert();
-      window.removeEventListener("load", runAnimation);
-    };
+      return () => ctx && ctx.revert();
+    }, []); // run once per element
   };
 
-  useEffect(
-    () =>
-      setupBranchAnimation(branchRef, {
-        mobile: {
-          set: {
-            position: "absolute",
-            top: "-500px",
-            right: "-900px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { top: "0px", right: "0px", scale: 3 },
-        },
-        medium: {
-          set: {
-            position: "absolute",
-            top: "-1200px",
-            right: "-1400px",
-            zIndex: 10,
-            scale: 1.7,
-          },
-          to: { top: "0px", right: "0px", scale: 2.3 },
-        },
-        desktop: {
-          set: {
-            position: "absolute",
-            top: "-1000px",
-            right: "-2000px",
-            zIndex: 10,
-            scale: 2,
-          },
-          to: { top: "0px", right: "0px", scale: 4 },
-        },
-      }),
-    []
-  );
+  // Top-right branch
+  setupBranchAnimation(branchRef, {
+    mobile: {
+      set: {
+        position: "absolute",
+        top: 0,
+        right: 0, // <— pin to top-right like before
+        x: 900,
+        y: -500, // start off-screen
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 3 },
+    },
+    medium: {
+      set: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        x: 1400,
+        y: -1200,
+        zIndex: 10,
+        scale: 1.7,
+      },
+      to: { x: 0, y: 0, scale: 2.3 },
+    },
+    desktop: {
+      set: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        x: 2000,
+        y: -1000,
+        zIndex: 10,
+        scale: 2,
+      },
+      to: { x: 0, y: 0, scale: 4 },
+    },
+  });
 
-  useEffect(
-    () =>
-      setupBranchAnimation(branchLeftRef, {
-        mobile: {
-          set: {
-            position: "absolute",
-            top: "-500px",
-            left: "-600px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { top: "0px", left: "0px", scale: 2.5 },
-        },
-        medium: {
-          set: {
-            position: "absolute",
-            top: "-1000px",
-            left: "-1200px",
-            zIndex: 10,
-            scale: 2,
-          },
-          to: { top: "0px", left: "0px", scale: 2.5 },
-        },
-        desktop: {
-          set: {
-            position: "absolute",
-            top: "-1000px",
-            left: "-1100px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { top: "0px", left: "0px", scale: 3 },
-        },
-      }),
-    []
-  );
+  // Top-left branch
+  setupBranchAnimation(branchLeftRef, {
+    mobile: {
+      set: {
+        position: "absolute",
+        top: 0,
+        left: 0, // <— pin to top-left
+        x: -600,
+        y: -500,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    medium: {
+      set: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        x: -1200,
+        y: -1000,
+        zIndex: 10,
+        scale: 2,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    desktop: {
+      set: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        x: -1100,
+        y: -1000,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 3 },
+    },
+  });
 
-  useEffect(
-    () =>
-      setupBranchAnimation(branchBottomRightRef, {
-        mobile: {
-          set: {
-            position: "absolute",
-            bottom: "-500px",
-            right: "-900px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { bottom: "0px", right: "0px", scale: 2.5 },
-        },
-        medium: {
-          set: {
-            position: "absolute",
-            bottom: "-1000px",
-            right: "-1400px",
-            zIndex: 10,
-            scale: 2,
-          },
-          to: { bottom: "0px", right: "0px", scale: 2.5 },
-        },
-        desktop: {
-          set: {
-            position: "absolute",
-            bottom: "-1000px",
-            right: "-2000px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { bottom: "0px", right: "0px", scale: 3.7 },
-        },
-      }),
-    []
-  );
+  // Bottom-right branch
+  setupBranchAnimation(branchBottomRightRef, {
+    mobile: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        right: 0, // <— pin to bottom-right
+        x: 900,
+        y: 500,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    medium: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        x: 1400,
+        y: 1000,
+        zIndex: 10,
+        scale: 2,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    desktop: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        x: 2000,
+        y: 1000,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 3.7 },
+    },
+  });
 
-  useEffect(
-    () =>
-      setupBranchAnimation(branchBottomLeftRef, {
-        mobile: {
-          set: {
-            position: "absolute",
-            bottom: "-500px",
-            left: "-900px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { bottom: "0px", left: "0px", scale: 2.5 },
-        },
-        medium: {
-          set: {
-            position: "absolute",
-            bottom: "-1000px",
-            left: "-1200px",
-            zIndex: 10,
-            scale: 2,
-          },
-          to: { bottom: "0px", left: "0px", scale: 2.5 },
-        },
-        desktop: {
-          set: {
-            position: "absolute",
-            bottom: "-1000px",
-            left: "-1600px",
-            zIndex: 10,
-            scale: 1.5,
-          },
-          to: { bottom: "0px", left: "0px", scale: 3.5 },
-        },
-      }),
-    []
-  );
+  // Bottom-left branch
+  setupBranchAnimation(branchBottomLeftRef, {
+    mobile: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        left: 0, // <— pin to bottom-left
+        x: -900,
+        y: 500,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    medium: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        x: -1200,
+        y: 1000,
+        zIndex: 10,
+        scale: 2,
+      },
+      to: { x: 0, y: 0, scale: 2.5 },
+    },
+    desktop: {
+      set: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        x: -1600,
+        y: 1000,
+        zIndex: 10,
+        scale: 1.5,
+      },
+      to: { x: 0, y: 0, scale: 3.5 },
+    },
+  });
 
   const isValidEmail = (val) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(val).toLowerCase());
@@ -282,31 +299,31 @@ export default function Title() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#F6BB17] w-full min-h-[60vh] px-6 py-40 flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-between space-y-6 md:space-y-0 md:space-x-10 pointer-events-none"
+      className="relative bg-[#F6BB17] w-full min-h-[60vh] px-6 py-40 flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-between space-y-6 md:space-y-0 md:space-x-10 pointer-events-none opacity-0"
     >
       <img
         ref={branchRef}
         src={topRightBranch}
         alt="Branch top right"
-        className="w-40 md:w-56 object-contain z-5"
+        className="w-40 md:w-56 object-contain z-5 absolute invisible"
       />
       <img
         ref={branchLeftRef}
         src={topLeftBranch}
         alt="Branch top left"
-        className="w-40 md:w-56 object-contain z-5"
+        className="w-40 md:w-56 object-contain z-5 absolute invisible"
       />
       <img
         ref={branchBottomRightRef}
         src={bottomRightBranch}
         alt="Branch bottom right"
-        className="w-40 md:w-56 object-contain z-5 rotate-330"
+        className="w-40 md:w-56 object-contain z-5 rotate-330 absolute invisible"
       />
       <img
         ref={branchBottomLeftRef}
         src={bottomLeftBranch}
         alt="Branch bottom left"
-        className="w-40 md:w-56 object-contain z-5 rotate-10"
+        className="w-40 md:w-56 object-contain z-5 rotate-10 absolute invisible"
       />
 
       <div className="flex-1 flex items-center justify-center z-2">
