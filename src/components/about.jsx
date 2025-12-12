@@ -7,7 +7,8 @@ import seehb2019 from '../assets/images/2019seehb.png';
 import seehb2022 from '../assets/images/2022seehb.png';
 import seehb2024 from '../assets/images/2024seehb.png';
 import seehb2025 from '../assets/images/2025seehb.png';
-import xLogo from '../assets/images/x_logo.png'
+import xLogo from '../assets/images/x_logo.png';
+import EmailSignup from "./EmailSignup";
 
 const ImageCard = ({ src, label }) => (
   <HoverOrTouchHandler className="relative w-full h-full overflow-hidden rounded-md border border-gray-200">
@@ -49,6 +50,14 @@ export default function About() {
             psychology, SEEHB connects individuals from across the Southeastern U.S., including Georgia, Alabama, the
             Carolinas, Florida, and Tennessee.
           </p>
+
+          <EmailSignup
+            heading="Stay updated on future SEEHB events!"
+            // match About typography
+            headingClassName="text-2xl font-bold text-black custom-shadow-sm"
+            wrapperClassName="mt-6"
+            size='compact'
+          />
             
             <div className="mt-4 w-3/4 h-[3px] bg-gray-500 opacity-50 rounded-full mx-auto lg:mx-0" />
                 {/* Social media links on the right */}
@@ -66,6 +75,8 @@ export default function About() {
                 </section>
           </div>
       </div>
+
+      
 
       {/* Right: Grid of images with overlay */}
       <div className="flex-1 flex flex-col space-y-2">

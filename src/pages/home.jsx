@@ -7,7 +7,7 @@ import Directions2 from '../components/directions2';
 import Institutions from '../components/institutions';
 import SteeringCommittee from '../components/steeringcommittee';
 import BottomRSVP from '../components/bottomrsvp';
-import SteeringCommittee2 from '../components/steeringcommitteersvp';
+import SteeringCommittee_rsvp from '../components/steeringcommittee_rsvp';
 
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
       <DayCards />
       <Directions2 />
       <Institutions />
-      <SteeringCommittee2 />
+      <SteeringCommittee_rsvp />
       {/*<SteeringCommittee />
       <BottomRSVP />*/}
       

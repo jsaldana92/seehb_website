@@ -337,63 +337,21 @@ export default function Title() {
       </div>
 
       <div className="flex-1 flex items-center justify-center z-10">
-        <div className="flex flex-col items-center space-y-4 text-center pointer-events-auto w-full max-w-md">
+        <div className="flex flex-col items-center space-y-4 text-center pointer-events-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black custom-shadow">
-            Stay updated on future SEEHB events!
+            Join us Feb 7th to 8th, 2025
           </h1>
-
-          {/* Signup form */}
-          <form
-            onSubmit={handleSubmit}
-            className="w-full flex flex-col sm:flex-row gap-3 items-center justify-center"
+          <h2 className="text-xl md:text-2xl text-white drop-shadow-2xl custom-shadow">
+            at Indian Creek Lodge, Georgia State University
+          </h2>
+          <a
+            href="https://forms.gle/QnmLH5cqBcJe4RYU8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white text-black font-semibold px-6 py-2 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200"
           >
-            {/* Honeypot (hidden to humans) */}
-            <input
-              type="text"
-              name="website"
-              autoComplete="off"
-              tabIndex="-1"
-              className="hidden"
-              value={honey}
-              onChange={(e) => setHoney(e.target.value)}
-            />
-
-            <label htmlFor="email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="email"
-              type="email"
-              required
-              inputMode="email"
-              autoComplete="email"
-              placeholder="please enter your email..."
-              className="w-full sm:flex-1 px-4 py-3 rounded-md border bg-[#fcfcfc] border-black/20 shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              aria-invalid={status.state === "error" ? "true" : "false"}
-            />
-            <button
-              type="submit"
-              disabled={status.state === "loading"}
-              className="bg-white text-black font-semibold px-6 py-3 rounded shadow-md hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-60 disabled:hover:scale-100"
-            >
-              {status.state === "loading" ? "Signing Up..." : "Sign Up"}
-            </button>
-          </form>
-
-          {/* Status */}
-          {status.state === "success" && (
-            <p className="text-green-900 text-sm">{status.message}</p>
-          )}
-          {status.state === "error" && (
-            <p className="text-red-900 text-sm">{status.message}</p>
-          )}
-
-          <p className="text-xs text-black/70 mt-1">
-            We’ll only use your email to contact you about SEEHB events. You can
-            unsubscribe anytime.
-          </p>
+            RSVP
+          </a>
         </div>
       </div>
     </section>
