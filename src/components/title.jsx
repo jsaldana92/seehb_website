@@ -339,7 +339,7 @@ export default function Title() {
       <div className="flex-1 flex items-center justify-center z-10">
         <div className="flex flex-col items-center space-y-4 text-center pointer-events-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black custom-shadow">
-            Join us Feb 7th to 8th, 2025
+            Join us March 26th to 27th, 2026
           </h1>
           <h2 className="text-xl md:text-2xl text-white drop-shadow-2xl custom-shadow">
             at Indian Creek Lodge, Georgia State University
