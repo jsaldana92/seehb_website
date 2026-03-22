@@ -236,7 +236,7 @@ export default function Schedule() {
               Schedule
             </h1>
             <h2 className="text-xl md:text-2xl text-white drop-shadow-2xl custom-shadow">
-              February 2025
+              March 2026
             </h2>
           </div>
         </div>

@@ -6,17 +6,15 @@ import { useConferenceScroll } from './conferencescrollcontext';
 
 
 import HoverOrTouchHandler from './hoverortouchhandler';
-import rohiniImage from '../assets/presenters/rohini.png';
-import angelleImage from '../assets/presenters/angelle.png';
 import scientistImage from '../assets/images/scientist.png'
-import darbyImage from '../assets/presenters/darby.png'
-import ansleyImage from '../assets/presenters/ansley.png'
 import femalePoster from '../assets/images/poster_female2.png'
 import minwooImage from '../assets/presenters/minwoo.png'
-import mistryImage from '../assets/presenters/mistry.png'
 import graceImage from '../assets/presenters/grace.png'
-import giulianaImage from '../assets/presenters/giuliana.png'
-import amandaImage from '../assets/presenters/amanda.png'
+import sophiaImage from '../assets/presenters/sophia.png'
+import marianaImage from '../assets/presenters/mariana.png'
+import vieiraImage from '../assets/presenters/vieira.png'
+import mattImage from '../assets/presenters/post-doc matt.png'
+import lauraImage from '../assets/presenters/laura.jpg'
 
 
 
@@ -117,7 +115,7 @@ function SpecialTile({
     const { setSelectedDay, setTriggerScrollToTop, setPosterRedirected } = useSchedule();
 
     const handleClick = () => {
-    setPosterRedirected(true);         // ✅ Only this flow sets this flag
+    setPosterRedirected(true);         
     setTriggerScrollToTop(true);
     setSelectedDay('poster');
     };
@@ -394,237 +392,198 @@ export default function ConferenceSchedule() {
       {/* Divider */}
       <div className="h-[2px] bg-black opacity-75 w-1/2 mb-10"></div>
 
-      {/* Schedule Items */}
-      <ScheduleItem title="Arrival Breakfast" time="8:30 - 9:00" blockSide="left" />
-      <ScheduleItem title="Opening Remarks" time="9:00 - 9:30" blockSide="right" />
-      <ScheduleTitle title="Cognition & Social Behavior" />
+            {/* Schedule Items */}
+      <ScheduleItem title="Arrival/Breakfast" time="8:30 - 9:15" blockSide="left" />
+      <ScheduleItem title="Intro/Opening Remarks" time="9:15 - 9:30" blockSide="right" />
+      <ScheduleItem title="Lightning Slides" time="9:30 - 10:00" blockSide="left" />
+
+      <ScheduleTitle title="Morning Session" />
       <SpeakerTile
         align="left"
-        imgSrc={rohiniImage}
-        presentationTitle="Metacognitive Awareness of Abstract Rules in Rhesus Macaques: Monkeys Learn Abstract Rules, and They Know It"
+        imgSrc={minwooImage}
+        presentationTitle="Helping Is Associated With a Younger Brain Age"
         time="10:00 - 10:15"
         hoverSpeaker={{
-            firstName: 'Rohini',
-            lastName: 'Murugan',
-            institution: 'Emory University',
+            firstName: 'Minwoo',
+            lastName: 'Lee',
+            institution: 'Georgetown University',
         }}
-        abstractTitle="Metacognitive Awareness of Abstract Rules in Rhesus Macaques: Monkeys Learn Abstract Rules, and They Know It"
+        abstractTitle="Helping Is Associated With a Younger Brain Age"
         authors={[
-            { name: 'Rohini Murugan', affiliationNumber: '1, 2' },
-            { name: 'Angelle Antoun', affiliationNumber: '1, 2' },
-            { name: 'Kathleen J. Bostick', affiliationNumber: 2 },
-            { name: 'Tristan S. Correa', affiliationNumber: 2 },
-            { name: 'Benjamin Wilson', affiliationNumber: '1, 2' },
+            { name: 'Minwoo Lee', affiliationNumber: 1 },
+            { name: 'Casey K. Brown', affiliationNumber: 1 },
         ]}
         institutions={[
-            { number: 1, name: 'Department of Psychology, Emory University' },
-            { number: 2, name: 'Emory National Primate Research Center' },
+            { number: 1, name: 'Department of Psychology, Georgetown University' },
         ]}
-        abstractText="Humans readily apply abstract rules in areas as diverse as language, music, mathematics and logic. Nonhuman animals have also been shown to learn abstract rules. However, questions remain about how these rules are represented in the minds of animals. Here we ask whether rhesus macaques acquire implicit or explicit knowledge of abstract rules by testing if they are metacognitive when applying these rules. Monkeys were trained on a waiting time paradigm, in which they had to maintain a response (a touch on a touchscreen computer) for a variable waiting time (5-12 seconds) to receive a reward. This was then combined with a three-alternative forced-choice abstract rule task, which they had previously learned. If monkeys are metacognitive in applying these abstract rules and know when they respond correctly, they should wait longer on trials when they make a correct decision, and pre-emptively abort trials when they are incorrect. Our data support this prediction, demonstrating metacognition, and therefore explicit knowledge, of macaques’ decisions based on abstract rules. "
+        abstractText="Traditional evolutionary models often frame prosocial behavior as a costly trade-off between individual resources and inclusive fitness. However, in obligately interdependent species like humans, sustained investment in others may promote the provider’s own longevity by downregulating stress-related pathways and enhancing somatic maintenance. We tested this hypothesis by investigating whether social support provision prospectively predicts BrainAGE, a machine-learning-derived biomarker of neurobiological senescence, in mid-to-late adulthood. Using a nationally representative sample from the Midlife in the United States (MIDUS) study (N = 194; mean age 55.9 ± 13 years), we estimated the gap between predicted brain age (derived from T1-weighted MRI scans of gray and white matter) and chronological age. Hierarchical regression and bootstrapping analyses revealed that greater hours spent providing social support predicted a significantly 'younger' brain age gap. Crucially, this association remained robust after controlling for demographic factors, health status, lifestyle, and even the amount of social support received from others. Exploratory analysis further revealed that emotional support provision was a stronger and more reliable predictor of younger brain age than instrumental assistance, suggesting that the neurobiological benefits of prosociality may be specifically tied to socio-affective engagement among close others. These findings suggest that helping others may act as a behavioral pathway for neurobiological resilience, offering an evolutionary perspective on prosociality not as a net cost, but as a mechanism for extending the functional lifespan of the brain in social species."
       />
       <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
+
       <SpeakerTile
         align="right"
-        imgSrc={angelleImage}
-        presentationTitle="Can Monkeys Process Multiple Stimulus Pairs Compositionally?"
+        imgSrc={graceImage}
+        presentationTitle="Fur Rubbing as a Potential Resilience Protective Factor in Tufted Capuchin Monkeys (Sapajus spp.)"
         time="10:15 - 10:30"
         hoverSpeaker={{
-            firstName: 'Angelle',
-            lastName: 'Antoun',
-            institution: 'Emory University',
+            firstName: 'Grace',
+            lastName: 'Weyman-Heller',
+            institution: 'Georgia State University',
         }}
-        abstractTitle="Can Monkeys Process Multiple Stimulus Pairs Compositionally?"
+        abstractTitle="Fur Rubbing as a Potential Resilience Protective Factor in Tufted Capuchin Monkeys (Sapajus spp.)"
         authors={[
-            { name: 'Angelle Antoun', affiliationNumber: '1, 2' },
-            { name: 'Rohini Murugan', affiliationNumber: '1, 2' },
-            { name: 'Tristan S. Correa', affiliationNumber: 2 },
-            { name: 'Benjamin Wilson', affiliationNumber: '1, 2' },
+            { name: 'Grace Weyman-Heller', affiliationNumber: '1, 2' },
+            { name: 'Sarah F. Brosnan', affiliationNumber: '1, 2, 3, 4' },
         ]}
         institutions={[
-            { number: 1, name: 'Department of Psychology, Emory University' },
-            { number: 2, name: 'Emory National Primate Research Center' },
+            { number: 1, name: 'Department of Psychology, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 2, name: 'Language Research Center, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 3, name: 'Neuroscience Institute, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 4, name: 'Center for Behavioral Neuroscience, Georgia State University, Atlanta, GA, U.S.A.' },
         ]}
-        abstractText="A central feature of human language is compositionality, the ability to combine discrete meaningful elements into higher-order cognitive representations, combining words into phrases, and phrases into sentences. We previously demonstrated compositional processing in rhesus macaques, training them to respond based on the combined ‘meaning’ of two stimuli. Here, we asked whether macaques could go beyond a single compositional operation, and process multiple stimulus combinations simultaneously. We first demonstrated that monkeys could integrate two iconic representations of individual stimulus features (color and shape), to select an appropriate composite image (a colored shape). We then presented the monkeys with two ‘phrases’, each consisting of a color and a shape, where the target was the set of two appropriately combined colored shapes. All monkeys learned to reliably select the target over foils in which all the stimulus features were present, but mis-combined. These results indicate that the macaques appropriately combined stimulus features, demonstrating a capacity for compositional processing. However, they often incorrectly selected foil stimuli that contained only one correct color-shape combination. This pattern of errors suggests that monkeys have difficulty processing multiple combinations simultaneously, hinting that improved capacity for composition might have played an integral role in the evolution of human language."
+        abstractText="Resilience, the ability to maintain or regain stability following adversity, offers a promising direction for animal welfare by emphasizing animals’ natural capacity to cope with stressors. Central to resilience are protective factors that prepare individuals for negative events or facilitate efficient recovery. Identifying such factors in animals may allow them greater autonomy over their affective states during unavoidable stress. In the present study, we investigated fur rubbing as a potential protective factor in 13 captive tufted capuchin monkeys (Sapajus spp.) using both cognitive and behavioral measures. We predicted that fur rubbing would improve working memory performance, particularly under higher task difficulty, and increase tolerance to a mild behavioral stressor. Contrary to predictions, fur rubbing did not significantly affect cognitive performance (b = –0.03, SE = 0.07, z = –0.47, p = .64) or stressor tolerance (b = 0.06, SE = 0.13, z = 0.43, p = .67). However, tolerance increased across sessions regardless of condition, consistent with habituation (b = 0.10, SE = 0.02, z = 4.00, p < .001). Future research should parse apart the biological, affective, and social components of fur rubbing to better evaluate its potential as a protective factor. More broadly, this work provides a framework for leveraging species-typical behaviors to support resilience and welfare, rather than relying solely on externally imposed enrichment. By linking behavior to its potential adaptive and evolutionary significance, intrinsic coping strategies can be identified and used directly to inform welfare practices in captive primates."
       />
-      <ScheduleItem title="Coffee Break" time="10:30 - 10:45 " blockSide="left" />
-      <ScheduleTitle title="Cognition & Social Behavior Cont." />
+
+      <ScheduleItem title="Coffee Break" time="10:30 - 11:00" blockSide="left" />
+
+      <ScheduleTitle title="Morning Session Cont." />
       <SpeakerTile
         align="left"
-        imgSrc={darbyImage}
-        presentationTitle="Fission-Fusion Housing Decreases Aggression and Increases Affiliation in Zoo-Living Spider Monkeys (Ateles geoffroyi)"
-        time="10:45 - 11:00"
+        imgSrc={sophiaImage}
+        presentationTitle="Audience-Dependent Suppression of High-Arm Grooming in Wild Adult Chimpanzees"
+        time="11:00 - 11:15"
         hoverSpeaker={{
-            firstName: 'Darby',
-            lastName: 'Proctor',
-            institution: 'Florida Insitute of Technology',
+            firstName: 'Sophia',
+            lastName: 'Kurilla',
+            institution: 'Emory University',
         }}
-        abstractTitle="Fission-Fusion Housing Decreases Aggression and Increases Affiliation in Zoo-Living Spider Monkeys (Ateles geoffroyi)"
+        abstractTitle="Audience-Dependent Suppression of High-Arm Grooming in Wild Adult Chimpanzees"
         authors={[
-            { name: 'Darby Proctor',},
-            { name: 'Catherine F. Talbot', },
-            { name: 'Abigail A. Stevens',},
+            { name: 'Sophie E. Kurilla' },
+            { name: 'Claudia Wilke' },
+            { name: 'Matthew J. Lem' },
+            { name: 'Zarin P. Machanda' },
+            { name: 'Melissa Emery Thompson' },
+            { name: 'Martin N. Muller' },
+            { name: 'Richard W. Wrangham' },
+            { name: 'Katie Slocombe' },
         ]}
-        institutions={[
-            { name: 'Collete of Psychology and Liberal Arts, Florida Institute of Technology' },
-        ]}
-        abstractText="Zoos strive to provide environments for their animals where they can engage in species-typical behaviors. For species that live in fission-fusion societies, where the group subdivides and regroups throughout the day, providing appropriate habitats is challenging. Here, we report on an innovative, animal-managed fission-fusion habitat complex for spider monkeys at Brevard Zoo, consisting of three separate habitats interconnected by a series of bridges. The monkeys have access to the entire complex (other than during cleaning) allowing them to form subgroups and regroup without human intervention. To determine the impact of the new housing complex on social behavior, we conducted observations before and after the complex was constructed. As one reason for fissioning is to reduce aggression, we predicted aggression would decrease in the new complex. As predicted, the monkeys were significantly less aggressive in the new complex (M = .01, SD = .03) than in their old habitat (M = .09, SD = .1), one-tailed t(4) = 2.22, p = .045, d = 0.992. They were also significantly more affiliative in the new complex (M = .99, SD = .03; old habitat: M = .81, SD = .07), two-tailed t(4) = -5.92, p = .004, d = -2.65. This suggests that providing spider monkeys with an environment where they can fission and fuse increases their welfare in zoos by decreasing aggression and increasing affiliation."
+        institutions={[]}
+        abstractText="High-arm grooming (HAG) is a distinctive social grooming posture in chimpanzees (Pan troglodytes) whose variable occurrence across communities has raised questions about the functions it may serve. Here, we use 15 years of observational data (N = 16,044 grooming bouts) on wild adult chimpanzees in the Kanyawara community, where HAG is a common, near-daily behavior, to test whether HAG functions as an advertising signal. We tested if HAG, as a visually salient form of grooming, advertises social relationships to third-party observers, drawing attention to grooming with high-value partners. We found no support for this social advertising function: HAG was significantly less likely to occur during grooming when an adult audience was present (Binomial GLMM (logit): β = −0.52, p < 0.001), particularly when high-ranking adult males were in the audience (β = −0.25, p < 0.001), and its occurrence significantly declined with increasing party size (β = −0.22, p < 0.001). When an audience was present, HAG was significantly less likely during intersex grooming when the female partner was in estrus (β = −1.28, p < 0.001). Together, our findings suggest an audience-dependent suppression of HAG and that instead of using HAG to draw social attention to grooming events, chimpanzees may be sensitive to the social risk of grooming interruption or aggression."
       />
       <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
+
       <SpeakerTile
         align="right"
-        imgSrc={ansleyImage}
-        presentationTitle="Lack of Association Between Community Social Cohesion and Distribution of Social Capital"
+        imgSrc={marianaImage}
+        presentationTitle="Rise of the Ape Knappers: Experimental Stone Flaking in Chimpanzees"
         time="11:15 - 11:30"
-        speaker={{
-            firstName: 'Ansley',
-            lastName: 'Warnock',
-            institution: 'University of Georgia',
+        hoverSpeaker={{
+            firstName: 'Mariana',
+            lastName: 'Bicalho Maia Correia',
+            institution: 'Emory University',
         }}
-        abstractTitle="Lack of Association Between Community Social Cohesion and Distribution of Social Capital"
+        abstractTitle="Rise of the Ape Knappers: Experimental Stone Flaking in Chimpanzees"
         authors={[
-            { name: 'Ansley Warnock'},
-            { name: 'Bram Tucker'},
+            { name: 'Mariana B. M. Correia' },
         ]}
         institutions={[
-            { name: 'Department of Anthropology, University of Georgia' },
+            { name: 'Emory University' },
         ]}
-        abstractText="In response to recent trends in increasing atomization and isolation worldwide, there has been a revitalization of interest in how social support affects individual health, perhaps best exemplified by the recent creation of the World Health Organization’s Commission for Human Connection. Alongside this, interest in how social cohesion affects community health has also made a resurgence, particularly regarding its effect on community resilience during the COVID-19 pandemic and the subsequent recovery efforts. It’s been found that many of the mechanisms that lend both elements of sociality their benefit to health overlap. Among these include access to information from trusted sources and, in turn, trust in the authorities implementing health interventions. Still, there exists a gap in the literature about the relationship between community social metrics and the distribution of social support within communities, leaving many questions unanswered about how the mechanisms that benefit health interact. Using a set of questionnaire data from NSF-funded research project BCS 1733917, PI Tucker from the southwestern region of Madagascar, I regressed social cohesion against a metric of social support inequality, expecting to find that higher community cohesion would be correlated with a more equal distribution of social support, given social cohesion’s theoretical basis in inter-group connectedness. Instead, I found no association. These results introduce the possibility of communities with high social cohesion that have a couple of cliques but many outside of these cliques falling through the gaps. Many questions about the nature of isolation are raised accordingly, particularly regarding the spillover effects that social cohesion as an institution has on those who are isolated. Further research into these questions could have important implications for public health interventions for outcomes requiring high compliance as well as implications for solutions to the question of social isolation point blank."
+        abstractText="Understanding the emergence of stone tool technology is limited by our inability to directly study extinct toolmakers, making comparative data from modern humans and our closest living relatives essential for insights into early technological capacities. Published attempts to train great apes to knap have largely failed (chimpanzees, gorillas, Bandini & Tennie, 2023), with minimal success in orangutans (3 flakes, Motes-Rodrigo et al., 2022) and only one substantial sample from bonobos (2 individuals, 321 pieces, Toth et al., 2006). This is the first study to successfully train chimpanzees to flake basalt nodules for reward and the largest number of successfully trained apes of any species, with five individuals producing >1,000 detached pieces to date from an initial cohort of 21. The most productive individual (58 sessions, ~29 hours) showed increasing detached pieces (R=0.6, p<0.0001) and whole flakes (R = 0.53, p<0.001). When compared to published archaeological and experimental data (Režek et al., 2018; Stout et al., 2019), chimpanzees produced a greater number of whole flakes than Oldowan and adult novices, but with minimal core reduction. Flakes were significantly smaller and thinner, and platform angles were increased rather than optimized (R=0.17, p<0.05), with no evidence of strategic angle selection. These morphometric differences enabled 99.5% classification accuracy between chimpanzee and Oldowan assemblages, confirming distinct technological signatures. Like human children (Kilgore et al., 2025), chimpanzees show weaker blows and limited core affordance perception despite available strength. This substantial sample now enables further investigating cognitive, behavioral, and neural basis in stone tool technology."
       />
-      <ScheduleItem title="Poster Teasers" time="11:15 - 11:30" blockSide="right" />
-      <ScheduleItem title="Lunch & Photos" time="11:30 - 12:30" blockSide="left" />
+
+      <ScheduleItem title="Photos" time="11:30 - 11:45" blockSide="right" />
+      <ScheduleItem title="Lunch" time="11:45 - 12:30" blockSide="left" />
+
       <SpecialTile
        //setSelectedDay={setSelectedDay}
         imgSrc={femalePoster}
         presentationTitle="Poster Session"
-        time="12:30 - 1:30"
+        time="12:30 - 2:00"
         speaker={{
             firstName: 'See Poster Abstracts',
-            //lastName: 'Warnock',
-            //institution: 'University of Georgia',
         }}
       />
-      <ScheduleTitle title="Development & Ageing" />
+            <ScheduleTitle title="Afternoon Session" />
       <SpeakerTile
         align="left"
-        imgSrc={minwooImage}
-        presentationTitle="Grandmaternal Caregiving is Associated with Distinct Multi-Voxel Neural Representation of Grandchildren in the Parental Motivation Circuit"
-        time="1:30 - 1:45"
-        hoverSpeaker={{
-            firstName: 'Minwoo',
-            lastName: 'Lee',
-            institution: 'Cornell University',
-        }}
-        abstractTitle="Grandmaternal Caregiving is Associated with Distinct Multi-Voxel Neural Representation of Grandchildren in the Parental Motivation Circuit"
-        authors={[
-            { name: 'Mimwoo Lee', affiliationNumber: 1 },
-            { name: 'Amber Gonzalez', affiliationNumber: 2 },
-            { name: 'James K. Riling', affiliationNumber: '3-7' },
-        ]}
-        institutions={[
-            { number: 1, name: 'Department of Psychology, College of Human Ecology, Cornell University' },
-            { number: 2, name: 'Department of Anthropology, Emory University' },
-            { number: 3, name: 'Department of Psychology, Emory University' },
-            { number: 4, name: 'Department of Psychiatry and Behavioral Sciences, Emory University' },
-            { number: 5, name: 'Emory National Primate Research Center, Emory University' },
-            { number: 6, name: 'Center for Translational and Social Neuroscience, Emory University' },
-            { number: 7, name: 'Center for Behavioral Neuroscience, Emory University' },
-        ]}
-        abstractText="Grandmothers enhance grandchild survival and maternal health through caregiving. Comparative evidence suggests that human grandmotherhood reflects a unique life history strategy promoting the inclusive fitness of post-reproductive females. Despite its evolutionary importance, the proximate neural mechanisms supporting grandmaternal caregiving remain unclear. This study uses functional magnetic resonance imaging (fMRI) and multivariate approaches to investigate how grandmaternal brains encode information about grandchildren and translate it into caregiving. Forty-seven grandmothers (Age = 59.1±7) completed an fMRI task viewing photos of a grandchild, the grandchild's parent, unfamiliar individuals, and non-human objects. Multi-voxel activation patterns associated with these stimuli were analyzed using representational similarity analysis, focusing on the hypothalamic and mesolimbic regions critical for mammalian parenting. Results reveal that viewing grandchild photos elicits distinct neural patterns within this circuitry, best explained by a model reflecting grandmothers' neural sensitivity to kinship. This representational structure was observed regardless of the grandmother's lineage or genetic relatedness to the grandchild's parent. Indeed, greater neural dissimilarity between the grandchild and other social categories correlated with higher self-reported affection and supportive behaviors towards grandchildren, particularly in paternal grandmothers. Our findings provide novel insights into how grandmaternal brain promotes caregiving that enhances inclusive fitness."
-      />
-      <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
-      <SpeakerTile
-        align="right"
-        imgSrc={mistryImage}
-        presentationTitle="Reproductive Senescence in Tufted Capuchin Monkeys (Sapajus apella): Analyzing the Relationship between Estradiol, Aging, and Behavioral Estrus in a Captive Population"
-        time="1:45 - 2:00"
-        hoverSpeaker={{
-            firstName: 'Arianna',
-            lastName: 'Mistry',
-            institution: 'Emory University',
-        }}
-        abstractTitle="Reproductive Senescence in Tufted Capuchin Monkeys (Sapajus apella): Analyzing the Relationship between Estradiol, Aging, and Behavioral Estrus in a Captive Population"
-        authors={[
-            { name: 'Arianna Mistry', affiliationNumber: 1 },
-            { name: 'Elizabeth Whiteside', affiliationNumber: 2 },
-            { name: 'Gita Gnanadesikan', affiliationNumber: 1 },
-            { name: 'Sarah Brosnan', affiliationNumber: 3 },
-            { name: 'Marcela Benítez', affiliationNumber: 1 },
-        ]}
-        institutions={[
-            { number: 1, name: 'Department of Anthropology, Emory University' },
-            { number: 2, name: 'Baylor College of Medicine' },
-            { number: 3, name: 'Department of Psychology, Georgia State University' },
-        ]}
-        abstractText="Menopause–the end of reproductive function–is a critical transition in a human female’s life. Humans can live up to a third of their lives in a post-reproductive stage, which is highly unusual among primates. As research on menopause expands, evidence of a post-reproductive period has recently been observed in wild chimpanzees and estimated in captive populations of chimpanzees, gorillas, orangutans, and macaques. However, hormonal evidence remains limited, and whether other long-lived primate species exhibit similar declines in reproductive hormones and fertility is still unknown.In this study, we examined age-related effects on fecal estradiol concentrations in 22 captive female tufted capuchin monkeys (Sapajus apella) at the Georgia State University Language Research Center from 2017 to 2024 to provide evidence for the occurrence of menopause in the oldest members of a captive population. In addition to age-related hormonal changes, we investigated how aging affects the frequency of sexual soliciting, or estrus, behaviors in individuals over the age of 30 to further explore the occurrence of menopause in tufted capuchins. Comparing adult (<30 years old) and old-age (>30 years old) individuals, we found that both fecal estradiol concentrations and frequencies of estrus behaviors decline with age. Our results were further supported by a biological validation with a female who had undergone an ovariectomy. This individual showed a significant difference in preoperative versus postoperative estradiol concentration and estrus behaviors, but no significant difference between the ovariectomized condition and the old-age individuals. Our findings suggest the occurrence of menopause in old-age, captive tufted capuchins and have implications for the use of estradiol to explore menopause in other captively housed, long-lived primates. In addition to improving our understanding of capuchin reproduction, this work informs theories regarding the adaptive significance of post-reproductive lifespans and the socioecological influences on female life history patterns."
-      />
-      <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
-      <SpeakerTile
-        align="left"
-        imgSrc={graceImage}
-        presentationTitle="Early Life Adversity in Chimpanzees: The Role of Disease Exposure"
+        imgSrc={vieiraImage}
+        presentationTitle="Development of Explorative Search and Risk Tolerance in BaYaka, Bandongo, and German Children"
         time="2:00 - 2:15"
         hoverSpeaker={{
-            firstName: 'Grace',
-            lastName: 'Cayless',
-            institution: 'Emory University',
-        }}
-        abstractTitle="Early Life Adversity in Chimpanzees: The Role of Disease Exposure"
-        authors={[
-            { name: 'Grace Cayless'},
-            { name: 'Elizabeth V. Lonsdorf'},
-        ]}
-        institutions={[
-            { name: 'Department of Anthropology, Emory University' },
-        ]}
-        abstractText="Early-life adversity (ELA) has been linked to poor behavioral and health outcomes in many long-lived social mammals, including humans. Currently, the long-term effects of cumulative adversity have only been studied in two primate species, with conflicting results—in female baboons, cumulative ELA predicted a shortened lifespan, while the experience of 3+ sources of ELA was correlated with a 70% reduction in later-life mortality risk for gorillas. Chimpanzees, like humans, exhibit lengthy, defined stages of development, during which they face various adversities while forming complex relationships with conspecifics. This makes them quality models for investigating how ELA influences health and survival outcomes, which will provide insights into human child development and resilience. Health adversity has not been addressed in previous primate studies of ELA, but respiratory outbreaks are known to impact energetic stress levels in wild chimpanzees. Therefore, exposure to respiratory disease during development is a potentially significant source of early life adversity. To explore this further, this project focuses on individual and maternal experiences of respiratory disease outbreak, utilizing long-term field data collected on wild chimpanzees at Gombe National Park, Tanzania. Preliminary research using this data indicates that in-utero disease exposure may significantly reduce lifespan, while limited disease exposure in the first 10 years of life may benefit longevity. Specifically, experiencing more than three outbreaks during development reduces lifespan, but two or fewer exposures do not have this effect. This work will contribute to a deeper understanding of the ways early-life adversity impacts individual mortality risk and shapes adult populations, and shed light on the connections between early life adversity, long-term health, and survival."
-      />
-      <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
-      <SpeakerTile
-        align="right"
-        imgSrc={giulianaImage}
-        presentationTitle="Diverse pathways through maternal loss for wild orphan chimpanzees (Pan troglodytes schweinfurthii) at Gombe National Park, Tanzania"
-        time="2:15 - 2:30"
-        hoverSpeaker={{
-            firstName: 'Giuliana',
-            lastName: 'Centofanti',
-            institution: 'Emory University',
-        }}
-        abstractTitle="Diverse pathways through maternal loss for wild orphan chimpanzees (Pan troglodytes schweinfurthii) at Gombe National Park, Tanzania"
-        authors={[
-            { name: 'Giuliana M. Centofanti', affiliationNumber: 1 },
-            { name: 'Joseph T. Feldblum', affiliationNumber: 2 },
-            { name: 'Elizabeth V. Lonsdorf', affiliationNumber: 1 },
-        ]}
-        institutions={[
-            { number: 1, name: 'Department of Anthropology, Emory University' },
-            { number: 2, name: 'Evolutionary Anthropology, Duke University' },
-        ]}
-        abstractText="Previous research on wild orphaned chimpanzees has focused on survival, lifespan, and adoption by group members, often emphasizing maternal siblings as the primary caregiver. In addition, previous reports have examined relatively short time periods encompassing the first few months post-orphaning. Less is known about longer-term patterns of association and/or association with non-sibling caregivers. We identified 49 cases of orphaning at Gombe National Park, Tanzania. Data on dyadic association with group members were available for 21 individuals: 9 belonged to the age class in which non-orphans are permanently associated with their mothers (<6 years old) and 12 belonged to the age class in which individuals are typically weaned and have more independence from their mothers (6-12 years old). We categorized individuals depending on the type of care provided by others in the first 18 months after maternal death: adoption - permanent association; variable care - non-permanent association and caregiving provided by >1 individual; or no care - no consistent primary association partner. Among individuals <6 years of age, 6 (67%) were adopted, 2 (22%) received variable care, and 1 (11%) received no care. Among individuals >6 years of age, 4 (33%) were adopted, 1 (8%) received variable care, and 7 (58%) received no care, aligning with non-orphaned individuals of this age who typically spend less time with their mother and become more socially fluid. In the variable care category, different patterns of association emerged. Of the two individuals <6 years of age who received variable care, one was found to have consistent but alternating levels of affiliation with their top 2 affiliates, while the other was found to have frequent changes in their top 3 affiliates. These results highlight diverse pathways through maternal loss for young chimpanzees."
-      />
-      <ScheduleItem title="Coffee Break" time="2:30 - 3:30" blockSide="right" />
-      <ScheduleTitle title="Keynote" />
-      <KeynoteTile
-        imgSrc={amandaImage}
-        presentationTitle="Friendly Foes & Shared Spaces: How primates and people negotiate the risks and rewards of rapidly changing landscapes"
-        time="3:00 - 4:00"
-        hoverSpeaker={{
-            firstName: 'Amanda',
-            lastName: 'Ellwanger',
+            firstName: 'Wilson',
+            lastName: 'Vieira',
             institution: 'Georgia State University',
         }}
-        abstractTitle="Friendly Foes & Shared Spaces: How primates and people negotiate the risks and rewards of rapidly changing landscapes"
+        abstractTitle="Development of Explorative Search and Risk Tolerance in BaYaka, Bandongo, and German Children"
         authors={[
-            { name: 'Amanda Ellwanger'},
-            //{ name: 'Jane Doe', affiliationNumber: 2 },
+            { name: 'Wilson Vieira', affiliationNumber: '1, 3' },
+            { name: 'Luke Maurits', affiliationNumber: 1 },
+            { name: 'Ardain Dzabatou', affiliationNumber: 2 },
+            { name: 'Daniel Haun', affiliationNumber: 1 },
+            { name: 'Sarah Pope-Caldwell', affiliationNumber: '3, 4' },
         ]}
         institutions={[
-            { name: 'Department of Anthropology, Georgia State University' },
-            //{ number: 2, name: 'Department of Ecology, Georgia Tech' },
+            { number: 1, name: 'Department of Comparative Cultural Psychology, Max Planck Institute for Evolutionary Anthropology, Leipzig, Germany' },
+            { number: 2, name: 'Université Marien Ngouabi' },
+            { number: 3, name: 'Department of Psychology, Georgia State University, Atlanta, Georgia' },
+            { number: 4, name: 'Language Research Center, Georgia State University, Atlanta, Georgia' },
         ]}
-        abstractText="Humans are prolific niche constructors—we not only shape our habitats but also influence the selective pressures acting on other species. Behaviorally flexible primates that can successfully exploit the rural-urban edge or adapt to changing climatic conditions may be particularly important for our understanding of the effects of human niche construction. In these coupled social and ecological landscapes, people and primates must negotiate the risks and rewards of rapidly changing landscapes and shared spaces. In this talk, I will focus on several major interrelated themes that define my research including the landscape of fear, conflict and coexistence, and resilience. I will share examples from research with chacma baboons (Papio ursinus) in South Africa and moor macaques (Macaca maura) in Sulawesi, while highlighting the integrative and collaborative research methodologies that I use to investigate the primate-human interface."
+        abstractText="Human adaptability relies on our ability to balance between safer and riskier behaviors according to environmental demands. Learning to avoid unnecessary or immoderate risks is indispensable for human decision-making. However, risky scenarios may also present opportunities to obtain valuable rewards. To properly exploit these opportunities when they emerge, humans need to be willing to: 1) explore their environments to find such opportunities (e.g., experimenting with new strategies), and 2) take risks and implement novel, and often unknown strategies. To investigate how these mechanisms influence human adaptive decision-making and how they develop, the present study investigates the development of explorative tendencies and risk preferences in children (ages 4 to 14) from three cultural contexts: urban Germans, hunter-gatherer BaYaka from the Republic of the Congo (ROC), and fisher-horticulturalist Bandongo from the ROC. These three communities present distinct subsistence-dependent food security levels, which has been shown to impact human willingness to explore and take risks. Additionally, we expected to observe a decrease in exploration and risk taking with age. Our data show higher exploration rates in German children than in Congolese children, corroborating results from previous research between communities with different levels of market integration. Additionally, while Congolese children become more risk-prone with age, German children become less so. These results highlight the multifaceted nature of risk preference. Interestingly, children across all three cultures and all ages become more risk-prone once they accumulate rewards, indicating a broader underlying mechanism of human risk-taking. This latter result points toward the idea that human risk-taking behaviors may generally be guided by our ability to build and use safety nets which promotes risk preference."
+      />
+      <div className="block md:hidden w-3/4 h-px bg-[#CCCCCC] my-4"></div>
+
+      <SpeakerTile
+        align="right"
+        imgSrc={mattImage}
+        presentationTitle="Female, but not Male, Capuchins Demonstrate Transitive Inference and the Symbolic Distance Effect in Transitive Inference List Task"
+        time="2:15 - 2:30"
+        hoverSpeaker={{
+            firstName: 'Matthew',
+            lastName: 'Babb',
+            institution: 'Georgia State University',
+        }}
+        abstractTitle="Female, but not Male, Capuchins Demonstrate Transitive Inference and the Symbolic Distance Effect in Transitive Inference List Task"
+        authors={[
+            { name: 'Matthew H. Babb', affiliationNumber: '1, 2' },
+            { name: 'Olga Lazareva', affiliationNumber: 3 },
+            { name: 'Sarah F. Brosnan', affiliationNumber: '1, 2, 4, 5' },
+        ]}
+        institutions={[
+            { number: 1, name: 'Department of Psychology, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 2, name: 'Language Research Center, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 3, name: 'Department of Psychology and Neuroscience, Drake University, Des Moines, IA, U.S.A.' },
+            { number: 4, name: 'Neuroscience Institute, Georgia State University, Atlanta, GA, U.S.A.' },
+            { number: 5, name: 'Center for Behavioral Neuroscience, Georgia State University, Atlanta, GA, U.S.A.' },
+        ]}
+        abstractText="Deductive reasoning enables both human and non-human animals to draw novel conclusions from existing information, and one well-studied form of this ability is transitive inference (TI). TI allows individuals to infer relationships that are never explicitly observed, a capacity that may be especially advantageous in navigating the complexities of social hierarchies. While this capacity has been demonstrated in some primates, many tests cannot rule out simpler associative explanations. Here we tested whether capuchin monkeys (Sapajus spp.) would use TI to correctly infer the position of items within a 7-item sequence using a recently developed methodology that accounts for alternative associative explanations while also providing a stringent test for the symbolic distance effect, in which subjects perform better on pairs of items that are further apart on the list. Subjects were trained on the seven items in three overlapping sequences (ABC, CDE, EFG). During testing, they then had to sequence every possible pair from the seven items, which included both within-list (e.g., AB, BC, AC) and between-list pairs (e.g., AE, DF, CG). Our critical test was the pairs with the middle position items (BD, DF, DF) because they can only be solved by integrating training sequences into a single unified list. Females, but not males, correctly sequenced these critical pairs during testing, suggesting integration. Furthermore, females exhibited a symbolic distance effect, showing higher accuracy on the BF pair than on the BD or DF pairs, while male performance did not differ across the pair types. Our results suggest that at least some capuchins do have the ability to make transitive inferences, but the degree to which they employ this ability may differ based on sex. This provides support for the hypothesis that deductive reasoning may differ based on context."
       />
 
-      <ScheduleItem title="Discussion and Clean-Up" time="4:00- 4:30" blockSide="left" />
+      <ScheduleItem title="Coffee Break" time="2:30 - 2:45" blockSide="left" />
+
+      <ScheduleTitle title="Keynote" />
+      <KeynoteTile
+        imgSrc={lauraImage}
+        presentationTitle="TBD Title"
+        time="2:45 - 3:45"
+        hoverSpeaker={{
+            firstName: 'Laura',
+            lastName: 'van Holstein',
+            institution: 'Emory University',
+        }}
+        abstractTitle="TBD Title"
+        authors={[
+            { name: 'Laura van Holstein' },
+        ]}
+        institutions={[
+          { number: '', name: 'Emory University' },
+        ]}
+        abstractText="TBD Abstract"
+      />
+
+      <ScheduleItem title="Closing & Awards" time="3:45 - 4:00" blockSide="right" />
+      <ScheduleItem title="Clean-Up" time="4:00 - 4:30" blockSide="left" />
 
     </div>
   );

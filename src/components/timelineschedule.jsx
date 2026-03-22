@@ -73,7 +73,7 @@ export default function TimelineSchedule() {
             Opening Dinner
           </span>
           <span className="text-sm text-[#00B050] border-b border-[#CFCECE] mt-1 pb-0.5">
-            Feb 7th
+            March 26th
           </span>
         </button>
 
@@ -86,7 +86,7 @@ export default function TimelineSchedule() {
             Conference
           </span>
           <span className="text-sm text-[#00B050] border-b border-[#CFCECE] mt-1 pb-0.5">
-            Feb 8th
+            March 27th
           </span>
         </button>
 
@@ -99,7 +99,7 @@ export default function TimelineSchedule() {
             Poster Session
           </span>
           <span className="text-sm text-[#00B050] border-b border-[#CFCECE] mt-1 pb-0.5">
-            Feb 8th
+            March 27th
           </span>
         </button>
       </div>

@@ -11,6 +11,7 @@ import Schedule from "./pages/schedule";
 import Media from "./pages/media";
 import { ScheduleProvider } from "./components/schedulecontext";
 import { ConferenceScrollProvider } from "./components/conferencescrollcontext";
+import LightingSlides from "./pages/lighting_slides";
 
 // Normalize paths so '/' and '/#/' are the same
 const normalizePath = (rawPath) => {
@@ -25,6 +26,7 @@ const titleFor = (path) => {
     "/": "SEEHB | Home",
     "/schedule": "SEEHB | Schedule",
     "/media": "SEEHB | Media",
+    "/lighting_slides": "SEEHB | Lighting Slides",
   };
   return map[path] || `SEEHB | ${path}`;
 };
@@ -70,6 +72,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/media" element={<Media />} />
+            <Route path="/lighting_slides" element={<LightingSlides />} />
           </Routes>
         </Router>
       </ScheduleProvider>

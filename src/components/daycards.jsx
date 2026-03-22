@@ -70,7 +70,7 @@ export default function DayCards() {
       {/* Title block */}
       <div className="w-full max-w-3xl px-6 text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold text-black custom-shadow">
-          SEEHB 2025 Schedule
+          SEEHB 2026 Schedule
         </h2>
         {/* Optional subtitle — remove if you don't want it */}
         {/* <p className="text-black/80 mt-1">SEEH 2025 recap</p> */}
@@ -82,14 +82,14 @@ export default function DayCards() {
           baseImg={dinnerImg}
           hoverImg={hunterImg}
           title="Opening Dinner"
-          date="February 7th"
+          date="March 26th"
           onClick={() => goToDay("dinner")}
         />
         <Card
           baseImg={conferenceImg}
           hoverImg={chimpanzeeImg}
           title="Conference"
-          date="February 8th"
+          date="March 27th"
           onClick={() => goToDay("conference")}
         />
       </div>
